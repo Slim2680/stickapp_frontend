@@ -19,11 +19,11 @@ function AccountScreen(props) {
   };
 
   const onPressLogin = () => {
-    console.log("click detecte #3");
+    console.log("click detecte #login");
   };
 
   const onPressSignIn = () => {
-    console.log("click detecte #4");
+    console.log("click detecte #signin");
   };
 
   return (
@@ -32,6 +32,8 @@ function AccountScreen(props) {
         containerStyle={{ marginBottom: 15, width: "70%" }}
         inputStyle={{ marginLeft: 10, color: "white" }}
         placeholder="email@adress.com"
+        // errorStyle={{ color: "red" }}
+        // errorMessage="Enter a valid email"
         leftIcon={<Icon name="envelope" size={21} color="#ffffff" />}
         onChangeText={(evt) => onSetEmail(evt)}
       />
@@ -40,6 +42,8 @@ function AccountScreen(props) {
         inputStyle={{ marginLeft: 10, color: "white" }}
         placeholder="password"
         secureTextEntry={true}
+        // errorStyle={{ color: "red" }}
+        // errorMessage="Password must be at least 6 characters"
         leftIcon={<Icon name="lock" size={27} color="#ffffff" />}
         onChangeText={(evt) => onSetPassword(evt)}
       />

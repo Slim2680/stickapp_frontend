@@ -6,11 +6,18 @@ import {
   TouchableHighlight,
   ScrollView,
   Image,
-  Button,
+  Modal,
+  TouchableOpacity,
 } from "react-native";
 import { Header } from "react-native-elements";
+import { MaterialIcons } from "@expo/vector-icons";
 
 function HomeScreen(props) {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalImage, setModalImage] = useState(0);
+  console.log("/////modalVisible", modalVisible);
+  console.log("/////modalImage", modalImage);
+
   const categories = [
     "food",
     "tech",
@@ -83,11 +90,39 @@ function HomeScreen(props) {
   ];
 
   const onPressCategory = () => {
-    console.log("click detected #1");
+    console.log("---press detected #category");
   };
 
   const onPressTitle = () => {
-    console.log("click detected #2");
+    console.log("---press detected #title");
+  };
+
+  const onPressNew = (neww) => {
+    // console.log("---press detected #image");
+    setModalVisible(true);
+    // console.log("--------new", neww);
+    // console.log("------------", neww.image);
+    setModalImage(neww.image);
+  };
+
+  const onPressPopular = (popular) => {
+    setModalVisible(true);
+    setModalImage(popular.image);
+  };
+
+  const onPressFunny = (funny) => {
+    setModalVisible(true);
+    setModalImage(funny.image);
+  };
+
+  const onPressFashion = (fashion) => {
+    setModalVisible(true);
+    setModalImage(fashion.image);
+  };
+
+  const onPressClose = () => {
+    console.log("---press detected #");
+    setModalVisible(!modalVisible);
   };
 
   return (
@@ -98,10 +133,24 @@ function HomeScreen(props) {
         backgroundColor="#111224"
         leftComponent={{
           text: "Welcome to StickApp!",
-          style: { color: "#ffffff" },
+          style: { color: "#ffffff", fontWeight: "600", fontSize: 20 },
         }}
         rightComponent={{ icon: "search", color: "#fff" }}
       />
+      <Modal visible={modalVisible} animationType="slide" transparent={true}>
+        <View style={styles.modalView}>
+          <View>
+            <MaterialIcons
+              name="close"
+              size={24}
+              style={{ ...styles.modalToggle, ...styles.modalClose }}
+              color={"red"}
+              onPress={() => onPressClose()}
+            />
+            <Image style={styles.modalContent} source={modalImage} />
+          </View>
+        </View>
+      </Modal>
       <ScrollView style={styles.stickerScroll}>
         <ScrollView
           horizontal
@@ -128,22 +177,24 @@ function HomeScreen(props) {
         </Text>
         <View style={styles.stickerView}>
           {news.map((neww, i) => {
+            // console.log("///// map neww", neww);
+            console.log("/////////map neww.image", neww.image);
             return (
-              <Image key={i} style={styles.tinySticker} source={neww.image} />
+              <TouchableOpacity key={i} onPress={() => onPressNew(neww)}>
+                <Image style={styles.tinySticker} source={neww.image} />
+              </TouchableOpacity>
             );
           })}
         </View>
-        <Text style={styles.stickerTitle} onPress={() => onPressTitle()}>
+        <Text style={styles.stickerTitle} onPress={() => onPressPopular()}>
           Popular
         </Text>
         <View style={styles.stickerView}>
           {populars.map((popular, i) => {
             return (
-              <Image
-                key={i}
-                style={styles.tinySticker}
-                source={popular.image}
-              />
+              <TouchableOpacity key={i} onPress={() => onPressPopular(popular)}>
+                <Image style={styles.tinySticker} source={popular.image} />
+              </TouchableOpacity>
             );
           })}
         </View>
@@ -153,7 +204,9 @@ function HomeScreen(props) {
         <View style={styles.stickerView}>
           {funnys.map((funny, i) => {
             return (
-              <Image key={i} style={styles.tinySticker} source={funny.image} />
+              <TouchableOpacity key={i} onPress={() => onPressFunny(funny)}>
+                <Image style={styles.tinySticker} source={funny.image} />
+              </TouchableOpacity>
             );
           })}
         </View>
@@ -163,11 +216,9 @@ function HomeScreen(props) {
         <View style={styles.stickerView}>
           {fashions.map((fashion, i) => {
             return (
-              <Image
-                key={i}
-                style={styles.tinySticker}
-                source={fashion.image}
-              />
+              <TouchableOpacity key={i} onPress={() => onPressFashion(fashion)}>
+                <Image style={styles.tinySticker} source={fashion.image} />
+              </TouchableOpacity>
             );
           })}
         </View>
@@ -177,7 +228,9 @@ function HomeScreen(props) {
         <View style={styles.stickerView}>
           {news.map((neww, i) => {
             return (
-              <Image key={i} style={styles.tinySticker} source={neww.image} />
+              <TouchableOpacity key={i} onPress={() => onPressNew(neww)}>
+                <Image style={styles.tinySticker} source={neww.image} />
+              </TouchableOpacity>
             );
           })}
         </View>
@@ -187,7 +240,9 @@ function HomeScreen(props) {
         <View style={styles.stickerView}>
           {news.map((neww, i) => {
             return (
-              <Image key={i} style={styles.tinySticker} source={neww.image} />
+              <TouchableOpacity key={i} onPress={() => onPressNew(neww)}>
+                <Image style={styles.tinySticker} source={neww.image} />
+              </TouchableOpacity>
             );
           })}
         </View>
@@ -243,6 +298,51 @@ const styles = StyleSheet.create({
     height: 71,
     borderRadius: 5,
     marginBottom: 30,
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 20,
+    marginTop: 205,
+    backgroundColor: "rgba(0, 0, 0, 0)",
+    borderRadius: 20,
+    padding: 5,
+    height: 435,
+    alignItems: "center",
+    justifyContent: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  modalToggle: {
+    marginLeft: 310,
+    borderWidth: 3,
+    borderColor: "#FF0000",
+    borderRadius: 15,
+    alignSelf: "center",
+  },
+  modalClose: {
+    marginBottom: 0,
+    marginBottom: 5,
+  },
+  modalContent: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 25,
+    borderWidth: 3,
+    borderColor: "white",
+    borderRadius: 20,
+    width: 360,
   },
 });
 
