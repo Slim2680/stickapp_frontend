@@ -75,7 +75,11 @@ function MessageScreen(props) {
 
   const onPressChat = (user) => {
     console.log("username", user.name);
-    props.navigation.navigate("Chat", { userName: user.name });
+    console.log(("§§§§§§§§§§avatar", user.avatar));
+    props.navigation.navigate("Chat", {
+      userName: user.name,
+      userPp: user.avatar,
+    });
   };
 
   return (

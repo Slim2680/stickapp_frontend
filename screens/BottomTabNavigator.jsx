@@ -69,6 +69,7 @@ function StackChat() {
           console.log("route", route);
           return {
             title: route.params.userName,
+            Pp: route.params.userPp,
             headerBackTitleVisible: false,
           };
         }}
