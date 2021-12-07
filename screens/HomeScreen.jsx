@@ -9,8 +9,9 @@ import {
   Modal,
   TouchableOpacity,
 } from "react-native";
-import { Header } from "react-native-elements";
+import { Header, Button } from "react-native-elements";
 import { MaterialIcons } from "@expo/vector-icons";
+import Icon from "react-native-vector-icons/MaterialIcons";
 
 function HomeScreen(props) {
   const [modalVisible, setModalVisible] = useState(false);
@@ -98,10 +99,7 @@ function HomeScreen(props) {
   };
 
   const onPressNew = (neww) => {
-    // console.log("---press detected #image");
     setModalVisible(true);
-    // console.log("--------new", neww);
-    // console.log("------------", neww.image);
     setModalImage(neww.image);
   };
 
@@ -125,6 +123,23 @@ function HomeScreen(props) {
     setModalVisible(!modalVisible);
   };
 
+  const onPressFavorite = () => {
+    console.log("---press detected #favorite");
+  };
+
+  const onPressCopy = () => {
+    console.log("---press detected #copy");
+  };
+
+  const onPressVisit = () => {
+    console.log("---press detected #visit");
+  };
+
+  const onPressView = () => {
+    console.log("---press detected #view");
+    setModalVisible(!modalVisible);
+  };
+
   return (
     <View style={styles.container}>
       <Header
@@ -132,24 +147,70 @@ function HomeScreen(props) {
         placement="left"
         backgroundColor="#111224"
         leftComponent={{
-          text: "Welcome to StickApp!",
+          text: "Welcome to.. StickApp! 🦄",
           style: { color: "#ffffff", fontWeight: "600", fontSize: 20 },
         }}
         rightComponent={{ icon: "search", color: "#fff" }}
       />
       <Modal visible={modalVisible} animationType="slide" transparent={true}>
-        <View style={styles.modalView}>
-          <View>
+        <TouchableOpacity
+          style={styles.modalView}
+          onPress={() => onPressView()}
+        >
+          <View
+            style={{
+              marginTop: 70,
+              marginBottom: 100,
+            }}
+          >
             <MaterialIcons
               name="close"
               size={24}
               style={{ ...styles.modalToggle, ...styles.modalClose }}
-              color={"red"}
+              color={"#fff"}
               onPress={() => onPressClose()}
             />
             <Image style={styles.modalContent} source={modalImage} />
+            <Button
+              buttonStyle={{
+                backgroundColor: "rgba(78, 116, 255, 1)",
+                borderRadius: 8,
+                borderWidth: 1,
+                borderColor: "#fff",
+                marginBottom: 7,
+              }}
+              icon={<Icon name="favorite-border" size={20} color="#ffffff" />}
+              title="   Add to favorite"
+              type="solid"
+              onPress={() => onPressFavorite()}
+            />
+            <Button
+              buttonStyle={{
+                backgroundColor: "rgba(78, 116, 255, 1)",
+                borderRadius: 8,
+                borderWidth: 1,
+                borderColor: "#fff",
+                marginBottom: 7,
+              }}
+              icon={<Icon name="content-copy" size={20} color="#ffffff" />}
+              title="Copy                   "
+              type="solid"
+              onPress={() => onPressCopy()}
+            />
+            <Button
+              buttonStyle={{
+                backgroundColor: "rgba(78, 116, 255, 1)",
+                borderRadius: 8,
+                borderWidth: 1,
+                borderColor: "#fff",
+              }}
+              icon={<Icon name="logout" size={20} color="#ffffff" />}
+              title="Visit                    "
+              type="solid"
+              onPress={() => onPressVisit()}
+            />
           </View>
-        </View>
+        </TouchableOpacity>
       </Modal>
       <ScrollView style={styles.stickerScroll}>
         <ScrollView
@@ -158,7 +219,6 @@ function HomeScreen(props) {
           style={styles.horizontalScroll}
         >
           {categories.map((category, index) => {
-            // console.log("category", category);
             return (
               <TouchableHighlight
                 key={index}
@@ -177,7 +237,6 @@ function HomeScreen(props) {
         </Text>
         <View style={styles.stickerView}>
           {news.map((neww, i) => {
-            // console.log("///// map neww", neww);
             console.log("/////////map neww.image", neww.image);
             return (
               <TouchableOpacity key={i} onPress={() => onPressNew(neww)}>
@@ -186,7 +245,7 @@ function HomeScreen(props) {
             );
           })}
         </View>
-        <Text style={styles.stickerTitle} onPress={() => onPressPopular()}>
+        <Text style={styles.stickerTitle} onPress={() => onPressTitle()}>
           Popular
         </Text>
         <View style={styles.stickerView}>
@@ -264,12 +323,9 @@ const styles = StyleSheet.create({
     marginTop: 5,
     marginHorizontal: 15,
     justifyContent: "space-between",
-    // width: 70,
-    // height: 58,
   },
   submitText: {
     color: "#fff",
-    // textAlign: "center",
     marginRight: 10,
     marginLeft: 10,
     marginTop: 15,
@@ -306,12 +362,10 @@ const styles = StyleSheet.create({
     marginTop: 22,
   },
   modalView: {
-    margin: 20,
-    marginTop: 205,
-    backgroundColor: "rgba(0, 0, 0, 0)",
+    flex: 1,
+    backgroundColor: "rgba(10, 10, 10, 0.7)",
     borderRadius: 20,
-    padding: 5,
-    height: 435,
+    padding: 10,
     alignItems: "center",
     justifyContent: "center",
     shadowColor: "#000",
@@ -326,13 +380,13 @@ const styles = StyleSheet.create({
   modalToggle: {
     marginLeft: 310,
     borderWidth: 3,
-    borderColor: "#FF0000",
+    borderColor: "#fff",
     borderRadius: 15,
     alignSelf: "center",
   },
   modalClose: {
     marginBottom: 0,
-    marginBottom: 5,
+    marginBottom: 10,
   },
   modalContent: {
     flex: 1,
