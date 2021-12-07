@@ -4,11 +4,26 @@ import { Input, Button } from "react-native-elements";
 import Icon from "react-native-vector-icons/FontAwesome";
 
 function AccountScreen(props) {
-  const [pseudo, setPseudo] = useState("");
-  console.log("pseudo ==", pseudo);
+  const [email, setEmail] = useState("");
+  console.log("email ==", email);
 
-  const onSetPseudo = (evt) => {
-    setPseudo(evt);
+  const [password, setPassword] = useState("");
+  console.log("password ==", password);
+
+  const onSetEmail = (evt) => {
+    setEmail(evt);
+  };
+
+  const onSetPassword = (evt) => {
+    setPassword(evt);
+  };
+
+  const onPressLogin = () => {
+    console.log("click detecte #3");
+  };
+
+  const onPressSignIn = () => {
+    console.log("click detecte #4");
   };
 
   return (
@@ -18,14 +33,15 @@ function AccountScreen(props) {
         inputStyle={{ marginLeft: 10, color: "white" }}
         placeholder="email@adress.com"
         leftIcon={<Icon name="envelope" size={21} color="#ffffff" />}
-        onChangeText={(evt) => onSetPseudo(evt)}
+        onChangeText={(evt) => onSetEmail(evt)}
       />
       <Input
         containerStyle={{ width: "70%" }}
         inputStyle={{ marginLeft: 10, color: "white" }}
         placeholder="password"
+        secureTextEntry={true}
         leftIcon={<Icon name="lock" size={27} color="#ffffff" />}
-        onChangeText={(evt) => onSetPseudo(evt)}
+        onChangeText={(evt) => onSetPassword(evt)}
       />
       <Button
         containerStyle={{
@@ -39,7 +55,7 @@ function AccountScreen(props) {
         }}
         title="Login           "
         type="solid"
-        onPress={() => onPressButton()}
+        onPress={() => onPressLogin()}
       />
       <Text style={styles.or}>——— Or ———</Text>
       <Button
@@ -55,7 +71,7 @@ function AccountScreen(props) {
         icon={<Icon name="arrow-right" size={20} color="#ffffff" />}
         title="Sign Up           "
         type="solid"
-        onPress={() => onPressButton()}
+        onPress={() => onPressSignIn()}
       />
     </View>
   );

@@ -48,8 +48,20 @@ function BottomTabNavigator(props) {
 
 function StackChat() {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="Contact" component={MessageScreen} />
+    <Stack.Navigator
+      component={ChatScreen}
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: "#111224",
+        },
+        headerTintColor: "#ffffff",
+        headerTitleStyle: {
+          fontWeight: "bold",
+        },
+        headerBackTitleVisible: false,
+      }}
+    >
+      <Stack.Screen name="Contacts" component={MessageScreen} />
       <Stack.Screen
         name="Chat"
         component={ChatScreen}

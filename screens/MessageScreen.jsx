@@ -1,7 +1,13 @@
 import { NavigationContainer } from "@react-navigation/native";
 import React, { useState } from "react";
 import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
-import { Card, ListItem, Avatar, SearchBar } from "react-native-elements";
+import {
+  Card,
+  ListItem,
+  Avatar,
+  SearchBar,
+  Header,
+} from "react-native-elements";
 
 function MessageScreen(props) {
   const users = [
@@ -45,6 +51,26 @@ function MessageScreen(props) {
       avatar: require("../assets/pp0.png"),
       conv: "hey Cricri",
     },
+    {
+      name: "Christelle",
+      avatar: require("../assets/pp0.png"),
+      conv: "hey Cricri",
+    },
+    {
+      name: "Christelle",
+      avatar: require("../assets/pp0.png"),
+      conv: "hey Cricri",
+    },
+    {
+      name: "Christelle",
+      avatar: require("../assets/pp0.png"),
+      conv: "hey Cricri",
+    },
+    {
+      name: "Christelle",
+      avatar: require("../assets/pp0.png"),
+      conv: "hey Cricri",
+    },
   ];
 
   const onPressChat = (user) => {
@@ -53,26 +79,30 @@ function MessageScreen(props) {
   };
 
   return (
-    <ScrollView
-    // contentContainerStyle={{
-    //   justifyContent: "center",
-    //   alignItems: "center",
-    // }}
-    >
+    <ScrollView contentContainerStyle={styles.container}>
       <SearchBar
-        placeholder="Type Here..."
+        round
+        placeholder="Search"
         // onChangeText={this.updateSearch}
         // value={search}
-        backgroundColor="white"
+        containerStyle={{ backgroundColor: "#111224" }}
       />
-      <Card.Divider />
       {users.map((user, index) => {
         return (
-          <ListItem key={index} bottomDivider onPress={() => onPressChat(user)}>
+          <ListItem
+            key={index}
+            bottomDivider
+            containerStyle={{ backgroundColor: "#111224" }}
+            onPress={() => onPressChat(user)}
+          >
             <Avatar rounded resizeMode="cover" source={user.avatar} />
             <ListItem.Content>
-              <ListItem.Title>{user.name}</ListItem.Title>
-              <ListItem.Subtitle>{user.conv}</ListItem.Subtitle>
+              <ListItem.Title style={{ color: "white" }}>
+                {user.name}
+              </ListItem.Title>
+              <ListItem.Subtitle style={{ color: "white" }}>
+                {user.conv}
+              </ListItem.Subtitle>
             </ListItem.Content>
           </ListItem>
         );
@@ -83,9 +113,6 @@ function MessageScreen(props) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
     backgroundColor: "#111224",
   },
 });
