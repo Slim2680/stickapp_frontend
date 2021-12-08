@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
-import { Input, Button } from "react-native-elements";
-import Icon from "react-native-vector-icons/FontAwesome";
+import React, { useState } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import { Input, Button } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
-function AccountScreen(props) {
-  const [email, setEmail] = useState("");
-  console.log("email ==", email);
+function LoginScreen(props) {
+  const [email, setEmail] = useState('');
+  console.log('email ==', email);
 
-  const [password, setPassword] = useState("");
-  console.log("password ==", password);
+  const [password, setPassword] = useState('');
+  console.log('password ==', password);
 
   const onSetEmail = (evt) => {
     setEmail(evt);
@@ -19,27 +19,31 @@ function AccountScreen(props) {
   };
 
   const onPressLogin = () => {
-    console.log("click detecte #3");
+    console.log('click detecte #login');
   };
 
   const onPressSignIn = () => {
-    console.log("click detecte #4");
+    console.log('click detecte #signin');
   };
 
   return (
     <View style={styles.container}>
       <Input
-        containerStyle={{ marginBottom: 15, width: "70%" }}
-        inputStyle={{ marginLeft: 10, color: "white" }}
+        containerStyle={{ marginBottom: 15, width: '70%' }}
+        inputStyle={{ marginLeft: 10, color: 'white' }}
         placeholder="email@adress.com"
+        // errorStyle={{ color: "red" }}
+        // errorMessage="Enter a valid email"
         leftIcon={<Icon name="envelope" size={21} color="#ffffff" />}
         onChangeText={(evt) => onSetEmail(evt)}
       />
       <Input
-        containerStyle={{ width: "70%" }}
-        inputStyle={{ marginLeft: 10, color: "white" }}
+        containerStyle={{ width: '70%' }}
+        inputStyle={{ marginLeft: 10, color: 'white' }}
         placeholder="password"
         secureTextEntry={true}
+        // errorStyle={{ color: "red" }}
+        // errorMessage="Password must be at least 6 characters"
         leftIcon={<Icon name="lock" size={27} color="#ffffff" />}
         onChangeText={(evt) => onSetPassword(evt)}
       />
@@ -50,7 +54,7 @@ function AccountScreen(props) {
           width: 200,
         }}
         buttonStyle={{
-          backgroundColor: "rgba(78, 116, 255, 1)",
+          backgroundColor: 'rgba(78, 116, 255, 1)',
           borderRadius: 3,
         }}
         title="Login           "
@@ -65,7 +69,7 @@ function AccountScreen(props) {
           width: 200,
         }}
         buttonStyle={{
-          backgroundColor: "rgba(78, 116, 255, 1)",
+          backgroundColor: 'rgba(78, 116, 255, 1)',
           borderRadius: 3,
         }}
         icon={<Icon name="arrow-right" size={20} color="#ffffff" />}
@@ -80,15 +84,15 @@ function AccountScreen(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#111224",
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#111224',
   },
   or: {
     marginTop: 50,
     fontSize: 20,
-    color: "white",
+    color: 'white',
   },
 });
 
-export default AccountScreen;
+export default LoginScreen;

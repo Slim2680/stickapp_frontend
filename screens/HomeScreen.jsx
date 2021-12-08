@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -6,102 +6,212 @@ import {
   TouchableHighlight,
   ScrollView,
   Image,
-  Button,
-} from "react-native";
-import { Header } from "react-native-elements";
+  Modal,
+  TouchableOpacity,
+} from 'react-native';
+import { Header, Button, searchBar } from 'react-native-elements';
+import { MaterialIcons } from '@expo/vector-icons';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 function HomeScreen(props) {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalImage, setModalImage] = useState(0);
+  console.log('/////modalVisible', modalVisible);
+  console.log('/////modalImage', modalImage);
+
   const categories = [
-    "food",
-    "tech",
-    "beauty",
-    "love",
-    "sport",
-    "travel",
-    "decoration",
-    "luxury",
+    'food',
+    'tech',
+    'beauty',
+    'love',
+    'sport',
+    'travel',
+    'decoration',
+    'luxury',
   ];
 
   const news = [
     {
-      image: require("../assets/sephora1.jpg"),
+      image: require('../assets/sephora1.jpg'),
     },
     {
-      image: require("../assets/new1.jpg"),
+      image: require('../assets/new1.jpg'),
     },
     {
-      image: require("../assets/new2.jpg"),
+      image: require('../assets/new2.jpg'),
     },
     {
-      image: require("../assets/food2.jpg"),
+      image: require('../assets/food2.jpg'),
     },
   ];
 
   const populars = [
     {
-      image: require("../assets/technology1.jpg"),
+      image: require('../assets/technology1.jpg'),
     },
     {
-      image: require("../assets/new3.png"),
+      image: require('../assets/new3.png'),
     },
     {
-      image: require("../assets/new4.png"),
+      image: require('../assets/new4.png'),
     },
     {
-      image: require("../assets/technology2.jpg"),
+      image: require('../assets/technology2.jpg'),
     },
   ];
 
   const funnys = [
     {
-      image: require("../assets/funny1.png"),
+      image: require('../assets/funny1.png'),
     },
     {
-      image: require("../assets/funny2.jpg"),
+      image: require('../assets/funny2.jpg'),
     },
     {
-      image: require("../assets/funny3.jpg"),
+      image: require('../assets/funny3.jpg'),
     },
     {
-      image: require("../assets/funny4.jpg"),
+      image: require('../assets/funny4.jpg'),
     },
   ];
 
   const fashions = [
     {
-      image: require("../assets/nike3.jpg"),
+      image: require('../assets/nike3.jpg'),
     },
     {
-      image: require("../assets/nike4.jpg"),
+      image: require('../assets/nike4.jpg'),
     },
     {
-      image: require("../assets/nike2.jpg"),
+      image: require('../assets/nike2.jpg'),
     },
     {
-      image: require("../assets/nike1.jpg"),
+      image: require('../assets/nike1.jpg'),
     },
   ];
 
   const onPressCategory = () => {
-    console.log("click detected #1");
+    console.log('---press detected #category');
   };
 
   const onPressTitle = () => {
-    console.log("click detected #2");
+    console.log('---press detected #title');
+  };
+
+  const onPressNew = (neww) => {
+    setModalVisible(true);
+    setModalImage(neww.image);
+  };
+
+  const onPressPopular = (popular) => {
+    setModalVisible(true);
+    setModalImage(popular.image);
+  };
+
+  const onPressFunny = (funny) => {
+    setModalVisible(true);
+    setModalImage(funny.image);
+  };
+
+  const onPressFashion = (fashion) => {
+    setModalVisible(true);
+    setModalImage(fashion.image);
+  };
+
+  const onPressClose = () => {
+    console.log('---press detected #');
+    setModalVisible(!modalVisible);
+  };
+
+  const onPressFavorite = () => {
+    console.log('---press detected #favorite');
+  };
+
+  const onPressCopy = () => {
+    console.log('---press detected #copy');
+  };
+
+  const onPressVisit = () => {
+    console.log('---press detected #visit');
+  };
+
+  const onPressView = () => {
+    console.log('---press detected #view');
+    setModalVisible(!modalVisible);
   };
 
   return (
     <View style={styles.container}>
       <Header
-        statusBarProps={{ barStyle: "light-content" }}
+        statusBarProps={{ barStyle: 'light-content' }}
         placement="left"
         backgroundColor="#111224"
         leftComponent={{
-          text: "Welcome to StickApp!",
-          style: { color: "#ffffff" },
+          text: 'Welcome to.. StickApp! 🦄',
+          style: { color: '#ffffff', fontWeight: '600', fontSize: 20 },
         }}
-        rightComponent={{ icon: "search", color: "#fff" }}
+        rightComponent={{ icon: 'search', color: '#fff' }}
       />
+      <Modal visible={modalVisible} animationType="slide" transparent={true}>
+        <TouchableOpacity
+          style={styles.modalView}
+          onPress={() => onPressView()}
+        >
+          <View
+            style={{
+              marginTop: 70,
+              marginBottom: 100,
+            }}
+          >
+            <MaterialIcons
+              name="close"
+              size={24}
+              style={{ ...styles.modalToggle, ...styles.modalClose }}
+              color={'#fff'}
+              onPress={() => onPressClose()}
+            />
+            <Image style={styles.modalContent} source={modalImage} />
+            <Button
+              buttonStyle={{
+                backgroundColor: 'rgba(78, 116, 255, 1)',
+                borderRadius: 8,
+                borderWidth: 1,
+                borderColor: '#fff',
+                marginBottom: 7,
+              }}
+              icon={<Icon name="favorite-border" size={20} color="#ffffff" />}
+              title="   Add to favorite"
+              type="solid"
+              onPress={() => onPressFavorite()}
+            />
+            <Button
+              buttonStyle={{
+                backgroundColor: 'rgba(78, 116, 255, 1)',
+                borderRadius: 8,
+                borderWidth: 1,
+                borderColor: '#fff',
+                marginBottom: 7,
+              }}
+              icon={<Icon name="content-copy" size={20} color="#ffffff" />}
+              title="Copy                   "
+              type="solid"
+              onPress={() => onPressCopy()}
+            />
+            <Button
+              buttonStyle={{
+                backgroundColor: 'rgba(78, 116, 255, 1)',
+                borderRadius: 8,
+                borderWidth: 1,
+                borderColor: '#fff',
+              }}
+              icon={<Icon name="logout" size={20} color="#ffffff" />}
+              title="Visit                    "
+              type="solid"
+              onPress={() => onPressVisit()}
+            />
+          </View>
+        </TouchableOpacity>
+      </Modal>
       <ScrollView style={styles.stickerScroll}>
         <ScrollView
           horizontal
@@ -109,7 +219,6 @@ function HomeScreen(props) {
           style={styles.horizontalScroll}
         >
           {categories.map((category, index) => {
-            // console.log("category", category);
             return (
               <TouchableHighlight
                 key={index}
@@ -129,7 +238,9 @@ function HomeScreen(props) {
         <View style={styles.stickerView}>
           {news.map((neww, i) => {
             return (
-              <Image key={i} style={styles.tinySticker} source={neww.image} />
+              <TouchableOpacity key={i} onPress={() => onPressNew(neww)}>
+                <Image style={styles.tinySticker} source={neww.image} />
+              </TouchableOpacity>
             );
           })}
         </View>
@@ -139,11 +250,9 @@ function HomeScreen(props) {
         <View style={styles.stickerView}>
           {populars.map((popular, i) => {
             return (
-              <Image
-                key={i}
-                style={styles.tinySticker}
-                source={popular.image}
-              />
+              <TouchableOpacity key={i} onPress={() => onPressPopular(popular)}>
+                <Image style={styles.tinySticker} source={popular.image} />
+              </TouchableOpacity>
             );
           })}
         </View>
@@ -153,7 +262,9 @@ function HomeScreen(props) {
         <View style={styles.stickerView}>
           {funnys.map((funny, i) => {
             return (
-              <Image key={i} style={styles.tinySticker} source={funny.image} />
+              <TouchableOpacity key={i} onPress={() => onPressFunny(funny)}>
+                <Image style={styles.tinySticker} source={funny.image} />
+              </TouchableOpacity>
             );
           })}
         </View>
@@ -163,11 +274,9 @@ function HomeScreen(props) {
         <View style={styles.stickerView}>
           {fashions.map((fashion, i) => {
             return (
-              <Image
-                key={i}
-                style={styles.tinySticker}
-                source={fashion.image}
-              />
+              <TouchableOpacity key={i} onPress={() => onPressFashion(fashion)}>
+                <Image style={styles.tinySticker} source={fashion.image} />
+              </TouchableOpacity>
             );
           })}
         </View>
@@ -177,7 +286,9 @@ function HomeScreen(props) {
         <View style={styles.stickerView}>
           {news.map((neww, i) => {
             return (
-              <Image key={i} style={styles.tinySticker} source={neww.image} />
+              <TouchableOpacity key={i} onPress={() => onPressNew(neww)}>
+                <Image style={styles.tinySticker} source={neww.image} />
+              </TouchableOpacity>
             );
           })}
         </View>
@@ -187,7 +298,9 @@ function HomeScreen(props) {
         <View style={styles.stickerView}>
           {news.map((neww, i) => {
             return (
-              <Image key={i} style={styles.tinySticker} source={neww.image} />
+              <TouchableOpacity key={i} onPress={() => onPressNew(neww)}>
+                <Image style={styles.tinySticker} source={neww.image} />
+              </TouchableOpacity>
             );
           })}
         </View>
@@ -199,22 +312,19 @@ function HomeScreen(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#111224",
+    backgroundColor: '#111224',
   },
   submit: {
-    backgroundColor: "#71678D",
+    backgroundColor: '#71678D',
     borderRadius: 30,
     borderWidth: 1,
-    borderColor: "#867e9f",
+    borderColor: '#867e9f',
     marginTop: 5,
     marginHorizontal: 15,
-    justifyContent: "space-between",
-    // width: 70,
-    // height: 58,
+    justifyContent: 'space-between',
   },
   submitText: {
-    color: "#fff",
-    // textAlign: "center",
+    color: '#fff',
     marginRight: 10,
     marginLeft: 10,
     marginTop: 15,
@@ -224,25 +334,68 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   stickerView: {
-    flexDirection: "row",
+    flexDirection: 'row',
     marginHorizontal: 15,
-    justifyContent: "space-between",
+    justifyContent: 'space-between',
   },
   stickerScroll: {
     marginTop: 15,
   },
   stickerTitle: {
-    color: "white",
+    color: 'white',
     marginLeft: 15,
     marginBottom: 6,
     fontSize: 21,
-    fontWeight: "500",
+    fontWeight: '500',
   },
   tinySticker: {
     width: 71,
     height: 71,
     borderRadius: 5,
     marginBottom: 30,
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginTop: 22,
+  },
+  modalView: {
+    flex: 1,
+    backgroundColor: 'rgba(10, 10, 10, 0.7)',
+    borderRadius: 20,
+    padding: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  modalToggle: {
+    marginLeft: 310,
+    borderWidth: 3,
+    borderColor: '#fff',
+    borderRadius: 15,
+    alignSelf: 'center',
+  },
+  modalClose: {
+    marginBottom: 0,
+    marginBottom: 10,
+  },
+  modalContent: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 25,
+    borderWidth: 3,
+    borderColor: 'white',
+    borderRadius: 20,
+    width: 360,
   },
 });
 
