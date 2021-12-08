@@ -16,8 +16,10 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 function HomeScreen(props) {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalImage, setModalImage] = useState(0);
+  const [liked, setLiked] = useState(false);
   console.log('/////modalVisible', modalVisible);
   console.log('/////modalImage', modalImage);
+  console.log('/////liked', liked);
 
   const categories = [
     'food',
@@ -90,6 +92,16 @@ function HomeScreen(props) {
     },
   ];
 
+  let color;
+  let icon;
+  if (liked === true) {
+    color = 'red';
+    icon = 'favorite';
+  } else {
+    color = '#ffffff';
+    icon = 'favorite-border';
+  }
+
   const onPressCategory = () => {
     console.log('---press detected #category');
   };
@@ -125,6 +137,7 @@ function HomeScreen(props) {
 
   const onPressFavorite = () => {
     console.log('---press detected #favorite');
+    liked === false ? setLiked(true) : setLiked(false);
   };
 
   const onPressCopy = () => {
@@ -179,7 +192,7 @@ function HomeScreen(props) {
                 borderColor: '#fff',
                 marginBottom: 7,
               }}
-              icon={<Icon name="favorite-border" size={20} color="#ffffff" />}
+              icon={<Icon name={icon} size={20} color={color} />}
               title="   Add to favorite"
               type="solid"
               onPress={() => onPressFavorite()}

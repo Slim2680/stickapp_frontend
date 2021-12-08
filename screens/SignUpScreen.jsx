@@ -1,17 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Input, Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-function LoginScreen(props) {
+function SignUpScreen(props) {
   const [username, setUsername] = useState('');
-  console.log('username ==', username);
-
   const [email, setEmail] = useState('');
-  console.log('email ==', email);
-
   const [password, setPassword] = useState('');
-  console.log('password ==', password);
+  console.log('---username ==', username);
+  console.log('---email ==', email);
+  console.log('---password ==', password);
 
   const onSetUsername = (evt) => {
     setUsername(evt);
@@ -25,17 +23,27 @@ function LoginScreen(props) {
     setPassword(evt);
   };
 
-  const onPressLogIn = () => {
-    console.log('click detecte #login');
-  };
-
-  const onPressSignUp = () => {
+  const onPressSignUp = async () => {
     console.log('click detecte #signup');
-    props.navigation.navigate('Sign Up');
+    await fetch('http://10.3.11.10:3000/sign-up', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `username=${username}&email=${email}&password=${password}`,
+    });
+    props.navigation.navigate('Home');
   };
 
   return (
     <View style={styles.container}>
+      <Input
+        containerStyle={{ marginBottom: 15, width: '70%' }}
+        inputStyle={{ marginLeft: 10, color: 'white' }}
+        placeholder="username"
+        // errorStyle={{ color: "red" }}
+        // errorMessage="Enter a valid email"
+        leftIcon={<Icon name="user" size={24} color="#ffffff" />}
+        onChangeText={(evt) => onSetUsername(evt)}
+      />
       <Input
         containerStyle={{ marginBottom: 15, width: '70%' }}
         inputStyle={{ marginLeft: 10, color: 'white' }}
@@ -65,22 +73,6 @@ function LoginScreen(props) {
           backgroundColor: 'rgba(78, 116, 255, 1)',
           borderRadius: 3,
         }}
-        title="Login           "
-        type="solid"
-        onPress={() => onPressLogIn()}
-      />
-      <Text style={styles.or}>——— Or ———</Text>
-      <Button
-        containerStyle={{
-          marginTop: 50,
-          height: 40,
-          width: 200,
-        }}
-        buttonStyle={{
-          backgroundColor: 'rgba(78, 116, 255, 1)',
-          borderRadius: 3,
-        }}
-        icon={<Icon name="arrow-right" size={20} color="#ffffff" />}
         title="Sign Up           "
         type="solid"
         onPress={() => onPressSignUp()}
@@ -103,4 +95,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoginScreen;
+export default SignUpScreen;

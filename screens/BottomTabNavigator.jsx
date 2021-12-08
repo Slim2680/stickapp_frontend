@@ -6,7 +6,9 @@ import HomeScreen from './HomeScreen';
 import ContactScreen from './ContactScreen';
 import LoginScreen from './LoginScreen';
 import ChatScreen from './ChatScreen';
+import SignUpScreen from './SignUpScreen';
 import { createStackNavigator } from '@react-navigation/stack';
+import { Button } from 'react-native-elements';
 
 const Tab = createBottomTabNavigator();
 
@@ -41,27 +43,29 @@ function BottomTabNavigator(props) {
       <Tab.Screen name="CashBack" component={CashBackScreen} />
       <Tab.Screen name="Home" component={HomeScreen} />
       <Tab.Screen name="Contact" component={StackChat} />
-      <Tab.Screen name="Login" component={LoginScreen} />
+      <Tab.Screen name="Login" component={StackSignUp} />
     </Tab.Navigator>
   );
 }
 
 function StackChat() {
   return (
-    <Stack.Navigator
-      component={ChatScreen}
-      screenOptions={{
-        headerStyle: {
-          backgroundColor: '#111224',
-        },
-        headerTintColor: '#ffffff',
-        headerTitleStyle: {
-          fontWeight: 'bold',
-        },
-        headerBackTitleVisible: false,
-      }}
-    >
-      <Stack.Screen name="Contacts" component={ContactScreen} />
+    <Stack.Navigator component={ChatScreen}>
+      <Stack.Screen
+        options={{
+          headerStyle: {
+            backgroundColor: '#111224',
+          },
+          headerTintColor: '#ffffff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+          headerBackTitleVisible: false,
+          headerLeft: null,
+        }}
+        name="Contacts"
+        component={ContactScreen}
+      />
       <Stack.Screen
         name="Chat"
         component={ChatScreen}
@@ -70,9 +74,52 @@ function StackChat() {
           return {
             title: route.params.userName,
             Pp: route.params.userPp,
+            headerStyle: {
+              backgroundColor: '#111224',
+            },
+            headerTintColor: '#ffffff',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
             headerBackTitleVisible: false,
           };
         }}
+      />
+    </Stack.Navigator>
+  );
+}
+
+function StackSignUp() {
+  return (
+    <Stack.Navigator component={LoginScreen}>
+      <Stack.Screen
+        options={{
+          headerStyle: {
+            backgroundColor: '#111224',
+          },
+          headerTintColor: '#ffffff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+          headerBackTitleVisible: false,
+          headerLeft: null,
+        }}
+        name="Log in"
+        component={LoginScreen}
+      />
+      <Stack.Screen
+        options={{
+          headerStyle: {
+            backgroundColor: '#111224',
+          },
+          headerTintColor: '#ffffff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+          headerBackTitleVisible: false,
+        }}
+        name="Sign Up"
+        component={SignUpScreen}
       />
     </Stack.Navigator>
   );
