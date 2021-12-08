@@ -86,6 +86,7 @@ function MessageScreen(props) {
     <ScrollView contentContainerStyle={styles.container}>
       <SearchBar
         round
+        style={styles.searchBar}
         placeholder="Search"
         // onChangeText={this.updateSearch}
         // value={search}
@@ -99,12 +100,19 @@ function MessageScreen(props) {
             containerStyle={{ backgroundColor: "#111224" }}
             onPress={() => onPressChat(user)}
           >
-            <Avatar rounded resizeMode="cover" source={user.avatar} />
+            <Avatar
+              rounded
+              size="medium"
+              resizeMode="cover"
+              source={user.avatar}
+            />
             <ListItem.Content>
-              <ListItem.Title style={{ color: "white" }}>
+              <ListItem.Title
+                style={{ color: "white", fontSize: 20, fontWeight: "600" }}
+              >
                 {user.name}
               </ListItem.Title>
-              <ListItem.Subtitle style={{ color: "white" }}>
+              <ListItem.Subtitle style={{ color: "#C0C0C0", fontSize: 15 }}>
                 {user.conv}
               </ListItem.Subtitle>
             </ListItem.Content>
@@ -116,6 +124,9 @@ function MessageScreen(props) {
 }
 
 const styles = StyleSheet.create({
+  searchBar: {
+    borderBottomWidth: 0,
+  },
   container: {
     backgroundColor: "#111224",
   },

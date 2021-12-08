@@ -45,13 +45,4 @@ function ChatScreen(props) {
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#111224",
-  },
-});
-
 export default ChatScreen;

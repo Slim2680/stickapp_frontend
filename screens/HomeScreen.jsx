@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -8,94 +8,94 @@ import {
   Image,
   Modal,
   TouchableOpacity,
-} from "react-native";
-import { Header, Button } from "react-native-elements";
-import { MaterialIcons } from "@expo/vector-icons";
-import Icon from "react-native-vector-icons/MaterialIcons";
+} from 'react-native';
+import { Header, Button, searchBar } from 'react-native-elements';
+import { MaterialIcons } from '@expo/vector-icons';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 function HomeScreen(props) {
   const [modalVisible, setModalVisible] = useState(false);
   const [modalImage, setModalImage] = useState(0);
-  console.log("/////modalVisible", modalVisible);
-  console.log("/////modalImage", modalImage);
+  console.log('/////modalVisible', modalVisible);
+  console.log('/////modalImage', modalImage);
 
   const categories = [
-    "food",
-    "tech",
-    "beauty",
-    "love",
-    "sport",
-    "travel",
-    "decoration",
-    "luxury",
+    'food',
+    'tech',
+    'beauty',
+    'love',
+    'sport',
+    'travel',
+    'decoration',
+    'luxury',
   ];
 
   const news = [
     {
-      image: require("../assets/sephora1.jpg"),
+      image: require('../assets/sephora1.jpg'),
     },
     {
-      image: require("../assets/new1.jpg"),
+      image: require('../assets/new1.jpg'),
     },
     {
-      image: require("../assets/new2.jpg"),
+      image: require('../assets/new2.jpg'),
     },
     {
-      image: require("../assets/food2.jpg"),
+      image: require('../assets/food2.jpg'),
     },
   ];
 
   const populars = [
     {
-      image: require("../assets/technology1.jpg"),
+      image: require('../assets/technology1.jpg'),
     },
     {
-      image: require("../assets/new3.png"),
+      image: require('../assets/new3.png'),
     },
     {
-      image: require("../assets/new4.png"),
+      image: require('../assets/new4.png'),
     },
     {
-      image: require("../assets/technology2.jpg"),
+      image: require('../assets/technology2.jpg'),
     },
   ];
 
   const funnys = [
     {
-      image: require("../assets/funny1.png"),
+      image: require('../assets/funny1.png'),
     },
     {
-      image: require("../assets/funny2.jpg"),
+      image: require('../assets/funny2.jpg'),
     },
     {
-      image: require("../assets/funny3.jpg"),
+      image: require('../assets/funny3.jpg'),
     },
     {
-      image: require("../assets/funny4.jpg"),
+      image: require('../assets/funny4.jpg'),
     },
   ];
 
   const fashions = [
     {
-      image: require("../assets/nike3.jpg"),
+      image: require('../assets/nike3.jpg'),
     },
     {
-      image: require("../assets/nike4.jpg"),
+      image: require('../assets/nike4.jpg'),
     },
     {
-      image: require("../assets/nike2.jpg"),
+      image: require('../assets/nike2.jpg'),
     },
     {
-      image: require("../assets/nike1.jpg"),
+      image: require('../assets/nike1.jpg'),
     },
   ];
 
   const onPressCategory = () => {
-    console.log("---press detected #category");
+    console.log('---press detected #category');
   };
 
   const onPressTitle = () => {
-    console.log("---press detected #title");
+    console.log('---press detected #title');
   };
 
   const onPressNew = (neww) => {
@@ -119,38 +119,38 @@ function HomeScreen(props) {
   };
 
   const onPressClose = () => {
-    console.log("---press detected #");
+    console.log('---press detected #');
     setModalVisible(!modalVisible);
   };
 
   const onPressFavorite = () => {
-    console.log("---press detected #favorite");
+    console.log('---press detected #favorite');
   };
 
   const onPressCopy = () => {
-    console.log("---press detected #copy");
+    console.log('---press detected #copy');
   };
 
   const onPressVisit = () => {
-    console.log("---press detected #visit");
+    console.log('---press detected #visit');
   };
 
   const onPressView = () => {
-    console.log("---press detected #view");
+    console.log('---press detected #view');
     setModalVisible(!modalVisible);
   };
 
   return (
     <View style={styles.container}>
       <Header
-        statusBarProps={{ barStyle: "light-content" }}
+        statusBarProps={{ barStyle: 'light-content' }}
         placement="left"
         backgroundColor="#111224"
         leftComponent={{
-          text: "Welcome to.. StickApp! 🦄",
-          style: { color: "#ffffff", fontWeight: "600", fontSize: 20 },
+          text: 'Welcome to.. StickApp! 🦄',
+          style: { color: '#ffffff', fontWeight: '600', fontSize: 20 },
         }}
-        rightComponent={{ icon: "search", color: "#fff" }}
+        rightComponent={{ icon: 'search', color: '#fff' }}
       />
       <Modal visible={modalVisible} animationType="slide" transparent={true}>
         <TouchableOpacity
@@ -167,16 +167,16 @@ function HomeScreen(props) {
               name="close"
               size={24}
               style={{ ...styles.modalToggle, ...styles.modalClose }}
-              color={"#fff"}
+              color={'#fff'}
               onPress={() => onPressClose()}
             />
             <Image style={styles.modalContent} source={modalImage} />
             <Button
               buttonStyle={{
-                backgroundColor: "rgba(78, 116, 255, 1)",
+                backgroundColor: 'rgba(78, 116, 255, 1)',
                 borderRadius: 8,
                 borderWidth: 1,
-                borderColor: "#fff",
+                borderColor: '#fff',
                 marginBottom: 7,
               }}
               icon={<Icon name="favorite-border" size={20} color="#ffffff" />}
@@ -186,10 +186,10 @@ function HomeScreen(props) {
             />
             <Button
               buttonStyle={{
-                backgroundColor: "rgba(78, 116, 255, 1)",
+                backgroundColor: 'rgba(78, 116, 255, 1)',
                 borderRadius: 8,
                 borderWidth: 1,
-                borderColor: "#fff",
+                borderColor: '#fff',
                 marginBottom: 7,
               }}
               icon={<Icon name="content-copy" size={20} color="#ffffff" />}
@@ -199,10 +199,10 @@ function HomeScreen(props) {
             />
             <Button
               buttonStyle={{
-                backgroundColor: "rgba(78, 116, 255, 1)",
+                backgroundColor: 'rgba(78, 116, 255, 1)',
                 borderRadius: 8,
                 borderWidth: 1,
-                borderColor: "#fff",
+                borderColor: '#fff',
               }}
               icon={<Icon name="logout" size={20} color="#ffffff" />}
               title="Visit                    "
@@ -237,7 +237,6 @@ function HomeScreen(props) {
         </Text>
         <View style={styles.stickerView}>
           {news.map((neww, i) => {
-            console.log("/////////map neww.image", neww.image);
             return (
               <TouchableOpacity key={i} onPress={() => onPressNew(neww)}>
                 <Image style={styles.tinySticker} source={neww.image} />
@@ -313,19 +312,19 @@ function HomeScreen(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#111224",
+    backgroundColor: '#111224',
   },
   submit: {
-    backgroundColor: "#71678D",
+    backgroundColor: '#71678D',
     borderRadius: 30,
     borderWidth: 1,
-    borderColor: "#867e9f",
+    borderColor: '#867e9f',
     marginTop: 5,
     marginHorizontal: 15,
-    justifyContent: "space-between",
+    justifyContent: 'space-between',
   },
   submitText: {
-    color: "#fff",
+    color: '#fff',
     marginRight: 10,
     marginLeft: 10,
     marginTop: 15,
@@ -335,19 +334,19 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
   stickerView: {
-    flexDirection: "row",
+    flexDirection: 'row',
     marginHorizontal: 15,
-    justifyContent: "space-between",
+    justifyContent: 'space-between',
   },
   stickerScroll: {
     marginTop: 15,
   },
   stickerTitle: {
-    color: "white",
+    color: 'white',
     marginLeft: 15,
     marginBottom: 6,
     fontSize: 21,
-    fontWeight: "500",
+    fontWeight: '500',
   },
   tinySticker: {
     width: 71,
@@ -357,18 +356,18 @@ const styles = StyleSheet.create({
   },
   centeredView: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     marginTop: 22,
   },
   modalView: {
     flex: 1,
-    backgroundColor: "rgba(10, 10, 10, 0.7)",
+    backgroundColor: 'rgba(10, 10, 10, 0.7)',
     borderRadius: 20,
     padding: 10,
-    alignItems: "center",
-    justifyContent: "center",
-    shadowColor: "#000",
+    alignItems: 'center',
+    justifyContent: 'center',
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
       height: 2,
@@ -380,9 +379,9 @@ const styles = StyleSheet.create({
   modalToggle: {
     marginLeft: 310,
     borderWidth: 3,
-    borderColor: "#fff",
+    borderColor: '#fff',
     borderRadius: 15,
-    alignSelf: "center",
+    alignSelf: 'center',
   },
   modalClose: {
     marginBottom: 0,
@@ -390,11 +389,11 @@ const styles = StyleSheet.create({
   },
   modalContent: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     marginBottom: 25,
     borderWidth: 3,
-    borderColor: "white",
+    borderColor: 'white',
     borderRadius: 20,
     width: 360,
   },
