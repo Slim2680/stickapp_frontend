@@ -3,27 +3,18 @@ import { View, Text, StyleSheet } from 'react-native';
 import { GiftedChat } from 'react-native-gifted-chat';
 import socketIOClient from 'socket.io-client';
 
-var socket = socketIOClient('http://10.3.11.8:3000');
+var socket = socketIOClient('http://10.3.11.7:3000');
 
 function ChatScreen(props) {
   const [messages, setMessages] = useState([]);
   const [listMessages, setListMessages] = useState([]);
   // console.log("////////////SETMESSAGES", messages);
 
-  useEffect(() => {
-    setMessages([
-      {
-        _id: 1,
-        // text: 'Hello la capsule',
-        createAt: new Date(),
-        user: {
-          _id: 2,
-          name: 'nickname',
-          avatar: 'YourimageURL',
-        },
-      },
-    ]);
-  }, []);
+  useEffect(() => { 
+    socket.on('sendMessageToAll', (newMessageData)=> {
+      setListMessages([...listMessages, newMessageData]);
+    });
+  }, [listMessages]);
 
   const onSend = useCallback((messages = []) => {
     console.log('MESSAGES', messages[0].text);
