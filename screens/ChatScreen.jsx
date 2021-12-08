@@ -1,9 +1,9 @@
-import React, { useState, useCallback, useEffect } from "react";
-import { View, Text, StyleSheet } from "react-native";
-import { GiftedChat } from "react-native-gifted-chat";
-import socketIOClient from "socket.io-client";
+import React, { useState, useCallback, useEffect } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import { GiftedChat } from 'react-native-gifted-chat';
+import socketIOClient from 'socket.io-client';
 
-var socket = socketIOClient("http://10.3.11.8:3000");
+var socket = socketIOClient('http://10.3.11.8:3000');
 
 function ChatScreen(props) {
   const [messages, setMessages] = useState([]);
@@ -14,23 +14,28 @@ function ChatScreen(props) {
     setMessages([
       {
         _id: 1,
-        texte: "Hello la capsule",
+        // text: 'Hello la capsule',
         createAt: new Date(),
+        user: {
+          _id: 2,
+          name: 'nickname',
+          avatar: 'YourimageURL',
+        },
       },
     ]);
   }, []);
 
   const onSend = useCallback((messages = []) => {
-    console.log("MESSAGES", messages[0].text);
-    socket.emit("sendMessages", messages[0].text);
-    console.log("---------onSend");
+    console.log('MESSAGES', messages[0].text);
+    socket.emit('sendMessages', messages[0].text);
+    console.log('---------onSend');
     setMessages((previousMessages) =>
       GiftedChat.append(previousMessages, messages)
     );
   }, []);
 
   const onPressKeyboard = (text) => {
-    console.log("ONPRESSKEYBOARD", text);
+    console.log('ONPRESSKEYBOARD', text);
   };
 
   return (

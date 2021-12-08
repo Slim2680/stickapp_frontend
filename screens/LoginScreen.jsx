@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import { Input, Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-function AccountScreen(props) {
+function LoginScreen(props) {
   const [email, setEmail] = useState('');
   console.log('email ==', email);
 
@@ -95,4 +95,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AccountScreen;
+export default LoginScreen;

@@ -3,8 +3,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { FontAwesome5 } from '@expo/vector-icons';
 import CashBackScreen from './CashBackScreen';
 import HomeScreen from './HomeScreen';
-import MessageScreen from './MessageScreen';
-import AccountScreen from './AccountScreen';
+import ContactScreen from './ContactScreen';
+import LoginScreen from './LoginScreen';
 import ChatScreen from './ChatScreen';
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -22,9 +22,9 @@ function BottomTabNavigator(props) {
             iconName = 'money-bill-alt';
           } else if (route.name === 'Home') {
             iconName = 'home';
-          } else if (route.name === 'Message') {
+          } else if (route.name === 'Contact') {
             iconName = 'comment';
-          } else if (route.name === 'Account') {
+          } else if (route.name === 'Login') {
             iconName = 'user';
           }
           return <FontAwesome5 name={iconName} size={24} color={color} />;
@@ -40,8 +40,8 @@ function BottomTabNavigator(props) {
     >
       <Tab.Screen name="CashBack" component={CashBackScreen} />
       <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Message" component={StackChat} />
-      <Tab.Screen name="Account" component={AccountScreen} />
+      <Tab.Screen name="Contact" component={StackChat} />
+      <Tab.Screen name="Login" component={LoginScreen} />
     </Tab.Navigator>
   );
 }
@@ -61,7 +61,7 @@ function StackChat() {
         headerBackTitleVisible: false,
       }}
     >
-      <Stack.Screen name="Contacts" component={MessageScreen} />
+      <Stack.Screen name="Contacts" component={ContactScreen} />
       <Stack.Screen
         name="Chat"
         component={ChatScreen}
