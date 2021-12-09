@@ -20,30 +20,32 @@ function BottomTabNavigator(props) {
       screenOptions={({ route }) => ({
         tabBarIcon: ({ color }) => {
           let iconName;
-          if (route.name === 'CashBack') {
+          if (route.name === ' ') {
             iconName = 'money-bill-alt';
-          } else if (route.name === 'Home') {
+          } else if (route.name === '  ') {
             iconName = 'home';
-          } else if (route.name === 'Contact') {
+          } else if (route.name === '   ') {
             iconName = 'comment';
-          } else if (route.name === 'Login') {
+          } else if (route.name === '    ') {
             iconName = 'user';
           }
-          return <FontAwesome5 name={iconName} size={24} color={color} />;
+          return <FontAwesome5 name={iconName} size={30} color={color} />;
         },
         tabBarActiveTintColor: '#97A1FF',
         tabBarInactiveTintColor: '#FFFFFF',
         tabBarStyle: {
           backgroundColor: '#111224',
-          height: 95,
+          height: 90,
+          paddingTop: 15,
+          marginTop: 2,
         },
         headerShown: false,
       })}
     >
-      <Tab.Screen name="CashBack" component={CashBackScreen} />
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Contact" component={StackChat} />
-      <Tab.Screen name="Login" component={StackSignUp} />
+      <Tab.Screen name=" " component={CashBackScreen} />
+      <Tab.Screen name="  " component={HomeScreen} />
+      <Tab.Screen name="   " component={StackChat} />
+      <Tab.Screen name="    " component={StackSignUp} />
     </Tab.Navigator>
   );
 }
