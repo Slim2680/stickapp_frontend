@@ -27,7 +27,7 @@ function LoginScreen(props) {
 
   const onPressLogIn = () => {
     console.log("click detecte #login");
-    props.navigation.navigate("ProfileScreen");
+    props.navigation.navigate("Profile Page");
   };
 
   const onPressSignUp = () => {
