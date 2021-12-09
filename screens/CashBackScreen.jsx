@@ -15,13 +15,15 @@ import { AntDesign } from '@expo/vector-icons';
 
 function CashBackScreen(props) {
   const [modalVisible, setModalVisible] = useState(false);
+  const [modalInfoVisible, setModalInfoVisible] = useState(false);
   const [modalImage, setModalImage] = useState(0);
   const [couponPressed, setCouponPressed] = useState(false);
   const [coupon, setCoupon] = useState('');
   const [visitPressed, setVisitPressed] = useState(false);
-  console.log('/////modalVisible', modalVisible);
-  console.log('/////modalImage', modalImage);
-  console.log('/////visitPressed', visitPressed);
+  const [starPressed, setStarPressed] = useState(false);
+  // console.log('/////modalVisible', modalVisible);
+  // console.log('/////modalImage', modalImage);
+  // console.log('/////visitPressed', visitPressed);
 
   const brands = [
     {
@@ -101,6 +103,13 @@ function CashBackScreen(props) {
     couponCode = '   Redeem coupon';
   }
 
+  let icon;
+  if (starPressed === true) {
+    icon = 'star';
+  } else {
+    icon = 'staro';
+  }
+
   const onPressImage = (brand) => {
     console.log('---press detected #image');
     setModalVisible(true);
@@ -137,6 +146,26 @@ function CashBackScreen(props) {
     console.log('---press detected #visit');
   };
 
+  const onPressInfo = () => {
+    console.log('---press detected #info');
+    setModalInfoVisible(true);
+  };
+
+  const onPressInfoView = () => {
+    console.log('---press detected #infoview');
+    setModalInfoVisible(!modalInfoVisible);
+  };
+
+  const onPressInfoClose = () => {
+    console.log('---press detected #infoclose');
+    setModalInfoVisible(!modalInfoVisible);
+  };
+
+  const onPressStar = () => {
+    console.log('---press detected #star');
+    starPressed === false ? setStarPressed(true) : setStarPressed(false);
+  };
+
   const renderElement = () => {
     if (visitPressed === true) {
       return (
@@ -150,6 +179,7 @@ function CashBackScreen(props) {
           icon={<MaterialIcons name="logout" size={20} color="#ffffff" />}
           title="Visit                      "
           type="solid"
+          onPress={() => onPressVisit()}
         />
       );
     } else {
@@ -164,18 +194,22 @@ function CashBackScreen(props) {
         placement="left"
         backgroundColor="#111224"
         leftComponent={{
-          text: 'My Cash Back',
+          text: 'My Cash Back 🤑',
           style: { color: '#ffffff', fontWeight: '600', fontSize: 20 },
         }}
         rightComponent={{ icon: 'search', color: '#fff' }}
       />
 
       <View style={styles.infoIcon}>
-        <MaterialIcons name="info-outline" size={24} color="white" />
+        <TouchableOpacity onPress={() => onPressInfo()}>
+          <MaterialIcons name="info-outline" size={35} color="white" />
+        </TouchableOpacity>
       </View>
 
       <View style={styles.starIcon}>
-        <AntDesign name="staro" size={85} color="#ffdf00" />
+        <TouchableOpacity onPress={() => onPressStar()}>
+          <AntDesign name={icon} size={80} color="#ffdf00" />
+        </TouchableOpacity>
       </View>
 
       <View>
@@ -195,8 +229,9 @@ function CashBackScreen(props) {
         }}
       />
       <Modal visible={modalVisible} animationType="slide" transparent={true}>
-        <TouchableOpacity
+        <TouchableHighlight
           style={styles.modalView}
+          underlayColor={'rgba(10, 10, 10, 0.8)'}
           onPress={() => onPressView()}
         >
           <View
@@ -207,14 +242,14 @@ function CashBackScreen(props) {
           >
             <MaterialIcons
               name="close"
-              size={24}
+              size={27}
               style={{ ...styles.modalToggle, ...styles.modalClose }}
               color={'#fff'}
               onPress={() => onPressClose()}
             />
             <View style={styles.modalContent}>
               <Image style={styles.modalImage} source={modalImage} />
-              <Text style={styles.modalText}>You get 15%</Text>
+              <Text style={styles.modalText}>You'll get 15%</Text>
             </View>
             <Button
               buttonStyle={{
@@ -232,7 +267,66 @@ function CashBackScreen(props) {
             />
             {renderElement()}
           </View>
-        </TouchableOpacity>
+        </TouchableHighlight>
+      </Modal>
+      <Modal visible={modalInfoVisible} animationType="slide">
+        <TouchableHighlight
+          style={styles.modalInfoView}
+          underlayColor={'rgba(0, 0, 0, 1)'}
+          activeOpacity={0.9}
+          onPress={() => onPressInfoView()}
+        >
+          <View
+            style={{
+              marginTop: 70,
+              marginBottom: 100,
+            }}
+          >
+            <MaterialIcons
+              name="close"
+              size={24}
+              style={{ ...styles.modalInfoToggle, ...styles.modalInfoClose }}
+              color={'#fff'}
+              onPress={() => onPressInfoClose()}
+            />
+            <View style={styles.modalInfoDesc}>
+              <Text style={styles.modalInfoTitle}>- CashBack Infos -</Text>
+              <Text style={styles.modalInfoText}>
+                Familiar with referral or cashback programs?
+              </Text>
+              <Text style={styles.modalInfoText}>
+                Well Stickapp pushed it to the next level.
+              </Text>
+              <Text style={styles.modalInfoText}>
+                By using our branded stickers within your chats, no matter which
+                one you use, Stickapp will reward you. Yeah that's right!!
+                You'll get paid by chatting! Isn't that Great?
+              </Text>
+              <Text style={styles.modalInfoText}>How...you may ask?</Text>
+              <Text style={styles.modalInfoText}>
+                Word of mouth is the most powerful marketing tool for a brand to
+                promote a product, a service or to increase brand awareness. We
+                do talk about brands in our everyday life. We promote them by
+                referring them to our entourage or simply when we express how
+                happy we are about a new purchase. And yet, we do not get
+                anything out of it.
+              </Text>
+              <Text style={styles.modalInfoText}>
+                Well with Stickapp, that's about to change. Whenever you use a
+                branded sticker from our library, you'll be rewarded. You'll be
+                collecting points that will turn into discounts for your future
+                online shopping!
+              </Text>
+              <Text style={styles.modalInfoText}>How does this work??</Text>
+              <Text style={styles.modalInfoText}>
+                Well since you are promoting a brand, we don't see why you
+                should not benefit from that. Stickapp will simply retrocede a
+                percentage of the income paid by the brand directly to your
+                cashback page so you can use that as a discount.
+              </Text>
+            </View>
+          </View>
+        </TouchableHighlight>
       </Modal>
       <ScrollView contentContainerStyle={styles.stickerView}>
         {brands.map((brand, i) => {
@@ -264,17 +358,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     fontSize: 15,
     marginTop: 5,
+    marginBottom: 5,
   },
   starIcon: {
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: -25,
-    marginBottom: 12,
+    marginTop: -20,
+    marginBottom: 10,
   },
   infoIcon: {
     justifyContent: 'flex-end',
-    marginTop: 10,
-    marginRight: 10,
+    marginTop: 15,
+    marginRight: 15,
     alignItems: 'flex-end',
   },
   stickerView: {
@@ -309,14 +404,13 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   modalToggle: {
-    marginLeft: 310,
+    marginLeft: 320,
     borderWidth: 3,
     borderColor: '#fff',
     borderRadius: 15,
     alignSelf: 'center',
   },
   modalClose: {
-    marginBottom: 0,
     marginBottom: 10,
   },
   modalContent: {
@@ -335,13 +429,47 @@ const styles = StyleSheet.create({
     borderColor: 'white',
     borderRadius: 15,
   },
+  modalInfoTitle: {
+    color: '#fff',
+    fontSize: 36,
+    fontWeight: '600',
+    marginBottom: 25,
+    marginLeft: 20,
+  },
   modalText: {
     color: '#303030',
     fontSize: 25,
     textAlign: 'center',
     backgroundColor: '#fff',
-    marginTop: 10,
+  },
+  modalInfoView: {
+    flex: 1,
+    backgroundColor: '#111224',
+    justifyContent: 'center',
+  },
+  modalInfoDesc: {
+    justifyContent: 'space-between',
+    marginBottom: 110,
+  },
+  modalInfoText: {
+    color: '#fff',
+    fontSize: 16,
+    textAlign: 'center',
+    lineHeight: 0,
     marginBottom: 10,
+    margin: 10,
+  },
+  modalInfoToggle: {
+    marginLeft: 320,
+    borderWidth: 3,
+    borderColor: '#fff',
+    borderRadius: 15,
+    alignSelf: 'center',
+  },
+  modalInfoClose: {
+    marginTop: 180,
+    marginBottom: -38,
+    marginRight: -10,
   },
 });
 

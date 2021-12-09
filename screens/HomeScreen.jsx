@@ -24,11 +24,29 @@ function HomeScreen(props) {
     'food',
     'tech',
     'beauty',
+    'meme',
     'love',
     'sport',
     'travel',
-    'decoration',
     'luxury',
+    'cars',
+    'holiday',
+    'gamer',
+    'anime',
+    'logo',
+    'food',
+    'tech',
+    'beauty',
+    'meme',
+    'love',
+    'sport',
+    'travel',
+    'luxury',
+    'cars',
+    'holiday',
+    'gamer',
+    'anime',
+    'logo',
   ];
 
   const news = [
@@ -165,8 +183,9 @@ function HomeScreen(props) {
         rightComponent={{ icon: 'search', color: '#fff' }}
       />
       <Modal visible={modalVisible} animationType="slide" transparent={true}>
-        <TouchableOpacity
+        <TouchableHighlight
           style={styles.modalView}
+          underlayColor={'rgba(10, 10, 10, 0.8)'}
           onPress={() => onPressView()}
         >
           <View
@@ -224,7 +243,7 @@ function HomeScreen(props) {
               onPress={() => onPressVisit()}
             />
           </View>
-        </TouchableOpacity>
+        </TouchableHighlight>
       </Modal>
       <ScrollView style={styles.stickerScroll}>
         <ScrollView
@@ -237,7 +256,7 @@ function HomeScreen(props) {
               <TouchableHighlight
                 key={index}
                 onPress={() => onPressCategory()}
-                underlayColor="#9893A8"
+                underlayColor="transparent"
               >
                 <View style={styles.submit}>
                   <Text style={styles.submitText}>{category}</Text>
@@ -331,18 +350,22 @@ const styles = StyleSheet.create({
   submit: {
     backgroundColor: '#71678D',
     borderRadius: 30,
-    borderWidth: 1,
+    borderWidth: 1.5,
     borderColor: '#867e9f',
     marginTop: 5,
-    marginHorizontal: 15,
+    marginHorizontal: 10,
     justifyContent: 'space-between',
+    width: 70,
+    height: 60,
   },
   submitText: {
     color: '#fff',
+    fontSize: 15,
     marginRight: 10,
     marginLeft: 10,
-    marginTop: 15,
-    paddingBottom: 15,
+    alignSelf: 'center',
+    marginTop: 20,
+    paddingBottom: 20,
   },
   horizontalScroll: {
     marginBottom: 15,
@@ -393,7 +416,7 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   modalToggle: {
-    marginLeft: 310,
+    marginLeft: 320,
     borderWidth: 3,
     borderColor: '#fff',
     borderRadius: 15,
