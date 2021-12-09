@@ -11,7 +11,6 @@ import {
 } from 'react-native';
 import { Header, Button, searchBar } from 'react-native-elements';
 import { MaterialIcons } from '@expo/vector-icons';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 
 function HomeScreen(props) {
   const [modalVisible, setModalVisible] = useState(false);
@@ -192,7 +191,7 @@ function HomeScreen(props) {
                 borderColor: '#fff',
                 marginBottom: 7,
               }}
-              icon={<Icon name={icon} size={20} color={color} />}
+              icon={<MaterialIcons name={icon} size={20} color={color} />}
               title="   Add to favorite"
               type="solid"
               onPress={() => onPressFavorite()}
@@ -205,7 +204,9 @@ function HomeScreen(props) {
                 borderColor: '#fff',
                 marginBottom: 7,
               }}
-              icon={<Icon name="content-copy" size={20} color="#ffffff" />}
+              icon={
+                <MaterialIcons name="content-copy" size={20} color="#ffffff" />
+              }
               title="Copy                   "
               type="solid"
               onPress={() => onPressCopy()}
@@ -217,7 +218,7 @@ function HomeScreen(props) {
                 borderWidth: 1,
                 borderColor: '#fff',
               }}
-              icon={<Icon name="logout" size={20} color="#ffffff" />}
+              icon={<MaterialIcons name="logout" size={20} color="#ffffff" />}
               title="Visit                    "
               type="solid"
               onPress={() => onPressVisit()}
@@ -366,6 +367,8 @@ const styles = StyleSheet.create({
     height: 71,
     borderRadius: 5,
     marginBottom: 30,
+    borderWidth: 1,
+    borderColor: '#fff',
   },
   centeredView: {
     flex: 1,
