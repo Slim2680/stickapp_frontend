@@ -9,12 +9,14 @@ function LoginScreen(props) {
   const [password, setPassword] = useState('');
   const [userExists, setUserExists] = useState(false);
   const [errorsLogin, setErrorsLogin] = useState([]);
-  const [errorsSignup, setErrorsSignup] = useState([]);
-  console.log('username ==', username);
-  console.log('email ==', email);
-  console.log('password ==', password);
-  console.log('/////////////error login', errorsLogin);
-  console.log('/////////////error signup', errorsSignup);
+  const [errEmailLogin, setErrEmailLogin] = useState('');
+  const [errPasswordLogin, setErrPasswordLogin] = useState('');
+  // console.log('username ==', username);
+  // console.log('email ==', email);
+  // console.log('password ==', password);
+  // console.log('/////////////error login', errorsLogin);
+  // console.log('=======>err Email', errEmailLogin);
+  // console.log('=======>err Password', errPasswordLogin);
 
   const onSetUsername = (evt) => {
     setUsername(evt);
@@ -30,6 +32,8 @@ function LoginScreen(props) {
 
   const onPressLogIn = async () => {
     console.log('click detecte #login');
+    setErrEmailLogin('');
+    setErrPasswordLogin('');
     const data = await fetch('http://10.3.11.10:3000/log-in', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -45,6 +49,12 @@ function LoginScreen(props) {
     } else {
       setErrorsLogin(body.error);
     }
+
+    if (body.error.includes('wrong email')) {
+      setErrEmailLogin(body.error);
+    } else {
+      setErrPasswordLogin(body.error);
+    }
   };
 
   const onPressSignUp = () => {
@@ -58,8 +68,9 @@ function LoginScreen(props) {
         containerStyle={{ marginBottom: 15, width: '70%' }}
         inputStyle={{ marginLeft: 10, color: 'white' }}
         placeholder="email@adress.com"
-        // errorStyle={{ color: "red" }}
+        errorStyle={{ color: 'red' }}
         // errorMessage="Enter a valid email"
+        errorMessage={errEmailLogin}
         leftIcon={<Icon name="envelope" size={21} color="#ffffff" />}
         onChangeText={(evt) => onSetEmail(evt)}
       />
@@ -68,8 +79,9 @@ function LoginScreen(props) {
         inputStyle={{ marginLeft: 10, color: 'white' }}
         placeholder="password"
         secureTextEntry={true}
-        // errorStyle={{ color: "red" }}
+        errorStyle={{ color: 'red' }}
         // errorMessage="Password must be at least 6 characters"
+        errorMessage={errPasswordLogin}
         leftIcon={<Icon name="lock" size={27} color="#ffffff" />}
         onChangeText={(evt) => onSetPassword(evt)}
       />
