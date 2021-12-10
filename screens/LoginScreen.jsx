@@ -14,6 +14,7 @@ function LoginScreen(props) {
   console.log('email ==', email);
   console.log('password ==', password);
   console.log('/////////////error login', errorsLogin);
+  console.log('/////////////error signup', errorsSignup);
 
   const onSetUsername = (evt) => {
     setUsername(evt);
