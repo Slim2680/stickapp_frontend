@@ -4,6 +4,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import SplashScreen from "./screens/SplashScreen";
 import BottomTabNavigator from "./screens/BottomTabNavigator";
 
+
 const Stack = createStackNavigator();
 
 function App() {
@@ -19,5 +20,5 @@ function App() {
     </NavigationContainer>
   );
 }
-
+ 
 export default App;
