@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -9,28 +9,34 @@ import {
   Modal,
   TouchableOpacity,
   Button,
-} from "react-native";
-import { Header, searchBar, Avatar, Tab, TabView } from "react-native-elements";
-import { MaterialIcons } from "@expo/vector-icons";
-import Icon from "react-native-vector-icons/MaterialIcons";
+} from 'react-native';
+import { Header, searchBar, Avatar, Tab, TabView } from 'react-native-elements';
+import { MaterialIcons } from '@expo/vector-icons';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 function ProfileScreen(props) {
   const user = {
-    avatar: require("../assets/pp0.png"),
-    name: "Ilan",
+    avatar: require('../assets/pp0.png'),
+    name: 'Ilan',
   };
 
   const [tabIndex, setTabIndex] = useState(0);
 
   const onChangeTab = (index) => {
-    console.log("Clickdetected", index);
+    console.log('press detected #tab', index);
     setTabIndex(index);
+  };
+
+  const onPressParams = () => {
+    console.log('press detected #params');
   };
 
   return (
     <View style={styles.container}>
       <View style={styles.settingIcon}>
-        <MaterialIcons name="settings" size={35} color="white" />
+        <TouchableOpacity onPress={() => onPressParams()}>
+          <MaterialIcons name="settings" size={35} color="white" />
+        </TouchableOpacity>
       </View>
 
       <View>
@@ -44,7 +50,7 @@ function ProfileScreen(props) {
       <View
         style={{
           borderWidth: 0.25,
-          borderColor: "#d1d1d3",
+          borderColor: '#d1d1d3',
           borderRadius: 50,
           marginTop: 18,
         }}
@@ -56,22 +62,20 @@ function ProfileScreen(props) {
 
       <View>
         <Tab value={tabIndex} onChange={(index) => onChangeTab(index)}>
-          <Tab.Item title="Complete" />
+          <Tab.Item title="Completed" />
           <Tab.Item title="Pending" />
         </Tab>
 
         <TabView value={tabIndex}>
           <TabView.Item
-            style={{ backgroundColor: "red", width: "100%", height: 100 }}
+            style={{ backgroundColor: '#29233A', width: '100%', height: 100 }}
           >
-            <Text style={styles.text} h1>
-              Recent
-            </Text>
+            <Text style={styles.text}>Recent</Text>
           </TabView.Item>
           <TabView.Item
-            style={{ backgroundColor: "blue", width: "100%", height: 100 }}
+            style={{ backgroundColor: '#29233A', width: '100%', height: 100 }}
           >
-            <Text h1>Favorite</Text>
+            <Text style={styles.text}>Favorite</Text>
           </TabView.Item>
         </TabView>
       </View>
@@ -81,7 +85,7 @@ function ProfileScreen(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#111224",
+    backgroundColor: '#111224',
     // alignItems: "center",
     // justifyContent: "center",
   },
@@ -89,28 +93,28 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     borderRadius: 50,
-    marginTop: 15,
     borderWidth: 1,
-    borderColor: "#fff",
-    alignSelf: "center",
+    borderColor: '#fff',
+    alignSelf: 'center',
   },
   text: {
-    color: "white",
-    alignSelf: "center",
+    color: 'white',
+    alignSelf: 'center',
     marginTop: 15,
     fontSize: 25,
   },
   title: {
-    color: "white",
-    alignSelf: "center",
+    color: 'white',
+    alignSelf: 'center',
     marginTop: 15,
+    marginBottom: 15,
     fontSize: 30,
   },
   settingIcon: {
-    justifyContent: "flex-end",
+    justifyContent: 'flex-end',
     marginTop: 10,
     marginRight: 10,
-    alignItems: "flex-end",
+    alignItems: 'flex-end',
   },
 });
 

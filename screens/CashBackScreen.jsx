@@ -368,8 +368,8 @@ const styles = StyleSheet.create({
   },
   infoIcon: {
     justifyContent: 'flex-end',
-    marginTop: 15,
-    marginRight: 15,
+    marginTop: 10,
+    marginRight: 10,
     alignItems: 'flex-end',
   },
   stickerView: {

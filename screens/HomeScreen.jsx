@@ -9,7 +9,7 @@ import {
   Modal,
   TouchableOpacity,
 } from 'react-native';
-import { Header, Button, searchBar } from 'react-native-elements';
+import { Header, Button, searchBar, SpeedDial } from 'react-native-elements';
 import { MaterialIcons } from '@expo/vector-icons';
 
 function HomeScreen(props) {
