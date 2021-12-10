@@ -1,15 +1,15 @@
-import React from "react";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { FontAwesome5 } from "@expo/vector-icons";
-import CashBackScreen from "./CashBackScreen";
-import HomeScreen from "./HomeScreen";
-import ContactScreen from "./ContactScreen";
-import LoginScreen from "./LoginScreen";
-import ChatScreen from "./ChatScreen";
-import SignUpScreen from "./SignUpScreen";
-import { createStackNavigator } from "@react-navigation/stack";
-import { Button } from "react-native-elements";
-import ProfileScreen from "./ProfileScreen";
+import React from 'react';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { FontAwesome5 } from '@expo/vector-icons';
+import CashBackScreen from './CashBackScreen';
+import HomeScreen from './HomeScreen';
+import ContactScreen from './ContactScreen';
+import LoginScreen from './LoginScreen';
+import ChatScreen from './ChatScreen';
+import SignUpScreen from './SignUpScreen';
+import { createStackNavigator } from '@react-navigation/stack';
+import { Button } from 'react-native-elements';
+import ProfileScreen from './ProfileScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -21,21 +21,21 @@ function BottomTabNavigator(props) {
       screenOptions={({ route }) => ({
         tabBarIcon: ({ color }) => {
           let iconName;
-          if (route.name === " ") {
-            iconName = "money-bill-alt";
-          } else if (route.name === "  ") {
-            iconName = "home";
-          } else if (route.name === "   ") {
-            iconName = "comment";
-          } else if (route.name === "    ") {
-            iconName = "user";
+          if (route.name === ' ') {
+            iconName = 'money-bill-alt';
+          } else if (route.name === '  ') {
+            iconName = 'home';
+          } else if (route.name === '   ') {
+            iconName = 'comment';
+          } else if (route.name === '    ') {
+            iconName = 'user';
           }
           return <FontAwesome5 name={iconName} size={30} color={color} />;
         },
-        tabBarActiveTintColor: "#97A1FF",
-        tabBarInactiveTintColor: "#FFFFFF",
+        tabBarActiveTintColor: '#97A1FF',
+        tabBarInactiveTintColor: '#FFFFFF',
         tabBarStyle: {
-          backgroundColor: "#111224",
+          backgroundColor: '#111224',
           height: 90,
           paddingTop: 15,
           marginTop: 2,
@@ -57,11 +57,11 @@ function StackChat() {
       <Stack.Screen
         options={{
           headerStyle: {
-            backgroundColor: "#111224",
+            backgroundColor: '#111224',
           },
-          headerTintColor: "#ffffff",
+          headerTintColor: '#ffffff',
           headerTitleStyle: {
-            fontWeight: "bold",
+            fontWeight: 'bold',
           },
           headerBackTitleVisible: false,
           headerLeft: null,
@@ -73,16 +73,16 @@ function StackChat() {
         name="Chat"
         component={ChatScreen}
         options={({ route }) => {
-          console.log("route", route);
+          console.log('route', route);
           return {
             title: route.params.userName,
             Pp: route.params.userPp,
             headerStyle: {
-              backgroundColor: "#111224",
+              backgroundColor: '#111224',
             },
-            headerTintColor: "#ffffff",
+            headerTintColor: '#ffffff',
             headerTitleStyle: {
-              fontWeight: "bold",
+              fontWeight: 'bold',
             },
             headerBackTitleVisible: false,
           };
@@ -98,11 +98,11 @@ function StackSignUp() {
       <Stack.Screen
         options={{
           headerStyle: {
-            backgroundColor: "#111224",
+            backgroundColor: '#111224',
           },
-          headerTintColor: "#ffffff",
+          headerTintColor: '#ffffff',
           headerTitleStyle: {
-            fontWeight: "bold",
+            fontWeight: 'bold',
           },
           headerBackTitleVisible: false,
           headerLeft: null,
@@ -113,11 +113,11 @@ function StackSignUp() {
       <Stack.Screen
         options={{
           headerStyle: {
-            backgroundColor: "#111224",
+            backgroundColor: '#111224',
           },
-          headerTintColor: "#ffffff",
+          headerTintColor: '#ffffff',
           headerTitleStyle: {
-            fontWeight: "bold",
+            fontWeight: 'bold',
           },
           headerBackTitleVisible: false,
         }}
@@ -128,11 +128,11 @@ function StackSignUp() {
       <Stack.Screen
         options={{
           headerStyle: {
-            backgroundColor: "#111224",
+            backgroundColor: '#111224',
           },
-          headerTintColor: "#ffffff",
+          headerTintColor: '#ffffff',
           headerTitleStyle: {
-            fontWeight: "bold",
+            fontWeight: 'bold',
           },
           headerBackTitleVisible: false,
         }}

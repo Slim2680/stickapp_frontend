@@ -1,18 +1,18 @@
-import React, { useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
-import { Button } from "react-native-elements";
-import Icon from "react-native-vector-icons/FontAwesome";
+import React, { useState } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import { Button } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 function SplashScreen(props) {
   const onPressButton = () => {
-    props.navigation.navigate("BottomTabNavigator", { screen: "Home" });
+    props.navigation.navigate('BottomTabNavigator', { screen: '  ' });
   };
 
   return (
     <View style={styles.container}>
       <Text
         style={{
-          color: "white",
+          color: 'white',
           marginBottom: 30,
         }}
       >
@@ -22,7 +22,7 @@ function SplashScreen(props) {
       <Button
         icon={<Icon name="arrow-right" size={20} color="white" />}
         buttonStyle={{
-          backgroundColor: "rgba(78, 116, 255, 1)",
+          backgroundColor: 'rgba(78, 116, 255, 1)',
           borderRadius: 3,
         }}
         title="  Go to Home"
@@ -36,9 +36,9 @@ function SplashScreen(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#111224",
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#111224',
   },
 });
 
