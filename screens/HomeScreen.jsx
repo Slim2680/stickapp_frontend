@@ -9,7 +9,7 @@ import {
   Modal,
   TouchableOpacity,
 } from 'react-native';
-import { Header, Button, searchBar, SpeedDial } from 'react-native-elements';
+import { Header, Button } from 'react-native-elements';
 import { MaterialIcons } from '@expo/vector-icons';
 
 function HomeScreen(props) {
@@ -174,15 +174,15 @@ function HomeScreen(props) {
     <View style={styles.container}>
       <Header
         statusBarProps={{ barStyle: 'light-content' }}
-        placement="left"
-        backgroundColor="#111224"
+        placement='left'
+        backgroundColor='#111224'
         leftComponent={{
           text: 'Welcome to.. StickApp! 🦄',
           style: { color: '#ffffff', fontWeight: '600', fontSize: 20 },
         }}
         rightComponent={{ icon: 'search', color: '#fff' }}
       />
-      <Modal visible={modalVisible} animationType="slide" transparent={true}>
+      <Modal visible={modalVisible} animationType='slide' transparent={true}>
         <TouchableHighlight
           style={styles.modalView}
           underlayColor={'rgba(10, 10, 10, 0.8)'}
@@ -195,7 +195,7 @@ function HomeScreen(props) {
             }}
           >
             <MaterialIcons
-              name="close"
+              name='close'
               size={24}
               style={{ ...styles.modalToggle, ...styles.modalClose }}
               color={'#fff'}
@@ -211,8 +211,8 @@ function HomeScreen(props) {
                 marginBottom: 7,
               }}
               icon={<MaterialIcons name={icon} size={20} color={color} />}
-              title="   Add to favorite"
-              type="solid"
+              title='   Add to favorite'
+              type='solid'
               onPress={() => onPressFavorite()}
             />
             <Button
@@ -224,10 +224,10 @@ function HomeScreen(props) {
                 marginBottom: 7,
               }}
               icon={
-                <MaterialIcons name="content-copy" size={20} color="#ffffff" />
+                <MaterialIcons name='content-copy' size={20} color='#ffffff' />
               }
-              title="Copy                   "
-              type="solid"
+              title='Copy                   '
+              type='solid'
               onPress={() => onPressCopy()}
             />
             <Button
@@ -237,9 +237,9 @@ function HomeScreen(props) {
                 borderWidth: 1,
                 borderColor: '#fff',
               }}
-              icon={<MaterialIcons name="logout" size={20} color="#ffffff" />}
-              title="Visit                    "
-              type="solid"
+              icon={<MaterialIcons name='logout' size={20} color='#ffffff' />}
+              title='Visit                    '
+              type='solid'
               onPress={() => onPressVisit()}
             />
           </View>
@@ -256,7 +256,7 @@ function HomeScreen(props) {
               <TouchableHighlight
                 key={index}
                 onPress={() => onPressCategory()}
-                underlayColor="transparent"
+                underlayColor='transparent'
               >
                 <View style={styles.submit}>
                   <Text style={styles.submitText}>{category}</Text>

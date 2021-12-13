@@ -82,52 +82,66 @@ function ContactScreen(props) {
   };
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <SearchBar
-        round
-        style={styles.searchBar}
-        placeholder="Search"
-        // onChangeText={this.updateSearch}
-        // value={search}
-        containerStyle={{ backgroundColor: '#111224' }}
-      />
-      {users.map((user, index) => {
-        return (
-          <ListItem
-            key={index}
-            bottomDivider
-            containerStyle={{ backgroundColor: '#111224' }}
-            onPress={() => onPressChat(user)}
-          >
-            <Avatar
-              rounded
-              size="medium"
-              resizeMode="cover"
-              source={user.avatar}
-            />
-            <ListItem.Content>
-              <ListItem.Title
-                style={{ color: 'white', fontSize: 20, fontWeight: '600' }}
-              >
-                {user.name}
-              </ListItem.Title>
-              <ListItem.Subtitle style={{ color: '#C0C0C0', fontSize: 15 }}>
-                {user.conv}
-              </ListItem.Subtitle>
-            </ListItem.Content>
-          </ListItem>
-        );
-      })}
-    </ScrollView>
+    <View style={styles.container}>
+      <ScrollView contentContainerStyle={styles.scrollView}>
+        <SearchBar
+          round
+          style={styles.searchBar}
+          placeholder='Search'
+          // onChangeText={this.updateSearch}
+          // value={search}
+          containerStyle={styles.searchContainer}
+        />
+        {users.map((user, index) => {
+          return (
+            <ListItem
+              key={index}
+              bottomDivider
+              containerStyle={{ backgroundColor: '#111224', marginBottom: 3 }}
+              onPress={() => onPressChat(user)}
+            >
+              <Avatar
+                rounded
+                size='medium'
+                resizeMode='cover'
+                source={user.avatar}
+              />
+              <ListItem.Content>
+                <ListItem.Title
+                  style={{
+                    color: 'white',
+                    fontSize: 18,
+                    fontWeight: '500',
+                    marginBottom: 5,
+                  }}
+                >
+                  {user.name}
+                </ListItem.Title>
+                <ListItem.Subtitle style={{ color: '#C0C0C0', fontSize: 15 }}>
+                  {user.conv}
+                </ListItem.Subtitle>
+              </ListItem.Content>
+            </ListItem>
+          );
+        })}
+      </ScrollView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#111224',
+  },
   searchBar: {
     borderBottomWidth: 0,
   },
-  container: {
+  scrollView: {
     backgroundColor: '#111224',
+  },
+  searchContainer: {
+    backgroundColor: '#111224',
+    borderBottomWidth: 0,
   },
 });
 

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Input, Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { connect } from 'react-redux';
 
 function LoginScreen(props) {
   const [username, setUsername] = useState('');
@@ -30,7 +31,7 @@ function LoginScreen(props) {
     setPassword(evt);
   };
 
-  const onPressLogIn = async () => {
+  const onPressLogIn = async (username) => {
     console.log('click detecte #login');
     setErrEmailLogin('');
     setErrPasswordLogin('');
@@ -41,11 +42,15 @@ function LoginScreen(props) {
     });
     const body = await data.json();
     console.log('/////body', body);
+    console.log('-------usernameeeee', body.user.username);
 
     if (body.login == true) {
       // props.addToken(body.token);
       setUserExists(true);
-      props.navigation.navigate('Profile Page');
+      props.addToken(body.token);
+      props.navigation.navigate('Profile Page', {
+        userName: body.user.username,
+      });
     } else {
       setErrorsLogin(body.error);
     }
@@ -67,22 +72,25 @@ function LoginScreen(props) {
       <Input
         containerStyle={{ marginBottom: 15, width: '70%' }}
         inputStyle={{ marginLeft: 10, color: 'white' }}
-        placeholder="email@adress.com"
+        placeholder='email@adress.com'
+        autoCorrect={false}
+        autoCapitalize='none'
         errorStyle={{ color: 'red' }}
         // errorMessage="Enter a valid email"
         errorMessage={errEmailLogin}
-        leftIcon={<Icon name="envelope" size={21} color="#ffffff" />}
+        leftIcon={<Icon name='envelope' size={21} color='#ffffff' />}
         onChangeText={(evt) => onSetEmail(evt)}
       />
       <Input
         containerStyle={{ width: '70%' }}
         inputStyle={{ marginLeft: 10, color: 'white' }}
-        placeholder="password"
+        placeholder='password'
+        autoCorrect={false}
         secureTextEntry={true}
         errorStyle={{ color: 'red' }}
         // errorMessage="Password must be at least 6 characters"
         errorMessage={errPasswordLogin}
-        leftIcon={<Icon name="lock" size={27} color="#ffffff" />}
+        leftIcon={<Icon name='lock' size={27} color='#ffffff' />}
         onChangeText={(evt) => onSetPassword(evt)}
       />
       <Button
@@ -95,8 +103,8 @@ function LoginScreen(props) {
           backgroundColor: 'rgba(78, 116, 255, 1)',
           borderRadius: 3,
         }}
-        title="Login           "
-        type="solid"
+        title='Login           '
+        type='solid'
         onPress={() => onPressLogIn()}
       />
       <Text style={styles.or}>——— Or ———</Text>
@@ -110,9 +118,9 @@ function LoginScreen(props) {
           backgroundColor: 'rgba(78, 116, 255, 1)',
           borderRadius: 3,
         }}
-        icon={<Icon name="arrow-right" size={20} color="#ffffff" />}
-        title="Sign Up           "
-        type="solid"
+        icon={<Icon name='arrow-right' size={20} color='#ffffff' />}
+        title='Sign Up           '
+        type='solid'
         onPress={() => onPressSignUp()}
       />
     </View>
@@ -133,4 +141,12 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LoginScreen;
+function mapDispatchToProps(dispatch) {
+  return {
+    addToken: function (token) {
+      dispatch({ type: 'addToken', token: token });
+    },
+  };
+}
+
+export default connect(null, mapDispatchToProps)(LoginScreen);

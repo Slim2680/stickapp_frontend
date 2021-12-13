@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -9,39 +9,36 @@ import {
   Modal,
   TouchableOpacity,
   Button,
-} from "react-native";
-import { Header, searchBar, Avatar, Tab, TabView } from "react-native-elements";
-import { MaterialIcons } from "@expo/vector-icons";
-import Icon from "react-native-vector-icons/MaterialIcons";
+} from 'react-native';
+import { Header, searchBar, Avatar, Tab, TabView } from 'react-native-elements';
+import { MaterialIcons } from '@expo/vector-icons';
+import { connect } from 'react-redux';
 
 function ProfileScreen(props) {
-  const user = {
-    avatar: require("../assets/pp0.png"),
-    name: "Ilan",
-  };
+  console.log('propsssss.token', props.token);
 
   const [tabIndex, setTabIndex] = useState(0);
 
+  const user = {
+    avatar: require('../assets/pp0.png'),
+    name: props.route.params.userName,
+  };
+
   const onChangeTab = (index) => {
-    console.log("press detected #tab", index);
+    console.log('press detected #tab', index);
     setTabIndex(index);
   };
 
-  const onPressParams = () => {
-    console.log("press detected #params");
+  const onPressParams = (user) => {
+    console.log('press detected #params');
+    props.navigation.navigate('Parameters  ⚙️', { user });
   };
-
-  const images = [
-    {
-      coin: require("../assets/coin.png"),
-    },
-  ];
 
   return (
     <View style={styles.container}>
       <View style={styles.settingIcon}>
-        <TouchableOpacity onPress={() => onPressParams()}>
-          <MaterialIcons name="settings" size={35} color="white" />
+        <TouchableOpacity onPress={() => onPressParams(user)}>
+          <MaterialIcons name='settings' size={35} color='white' />
         </TouchableOpacity>
       </View>
 
@@ -56,7 +53,7 @@ function ProfileScreen(props) {
       <View
         style={{
           borderWidth: 0.25,
-          borderColor: "#d1d1d3",
+          borderColor: '#d1d1d3',
           borderRadius: 50,
           marginTop: 18,
         }}
@@ -68,18 +65,18 @@ function ProfileScreen(props) {
 
       <View>
         <Tab value={tabIndex} onChange={(index) => onChangeTab(index)}>
-          <Tab.Item title="Completed" />
-          <Tab.Item title="Pending" />
+          <Tab.Item title='Completed' />
+          <Tab.Item title='Pending' />
         </Tab>
 
         <TabView value={tabIndex}>
           <TabView.Item
-            style={{ backgroundColor: "#29233A", width: "100%", height: 310 }}
+            style={{ backgroundColor: '#29233A', width: '100%', height: 310 }}
           >
             <View>
               <Image
                 style={styles.coin}
-                source={require("../assets/coin.png")}
+                source={require('../assets/coin.png')}
               />
 
               <Text style={styles.text}>No CashBack Transaction</Text>
@@ -92,12 +89,12 @@ function ProfileScreen(props) {
             </View>
           </TabView.Item>
           <TabView.Item
-            style={{ backgroundColor: "#29233A", width: "100%", height: 310 }}
+            style={{ backgroundColor: '#29233A', width: '100%', height: 310 }}
           >
             <View>
               <Image
                 style={styles.coin}
-                source={require("../assets/transaction.png")}
+                source={require('../assets/transaction.png')}
               />
 
               <Text style={styles.text}>No pending CashBack</Text>
@@ -111,45 +108,47 @@ function ProfileScreen(props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#111224",
-    // alignItems: "center",
-    // justifyContent: "center",
+    backgroundColor: '#111224',
   },
   pp: {
     width: 100,
     height: 100,
     borderRadius: 50,
     borderWidth: 1,
-    borderColor: "#fff",
-    alignSelf: "center",
+    borderColor: '#fff',
+    alignSelf: 'center',
   },
   text: {
-    color: "white",
-    alignSelf: "center",
+    color: 'white',
+    alignSelf: 'center',
     marginTop: 15,
     fontSize: 25,
   },
   title: {
-    color: "white",
-    alignSelf: "center",
+    color: 'white',
+    alignSelf: 'center',
     marginTop: 15,
     marginBottom: 15,
     fontSize: 30,
   },
   settingIcon: {
-    justifyContent: "flex-end",
+    justifyContent: 'flex-end',
     marginTop: 10,
     marginRight: 10,
-    alignItems: "flex-end",
+    alignItems: 'flex-end',
   },
   coin: {
-    justifyContent: "center",
-    alignItems: "center",
-    alignSelf: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'center',
     width: 125,
     height: 125,
     marginTop: 45,
   },
 });
 
-export default ProfileScreen;
+function mapStateToProps(state) {
+  return { token: state.token };
+}
+
+export default connect(mapStateToProps, null)(ProfileScreen);

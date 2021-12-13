@@ -11,6 +11,7 @@ import { Input, Button } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { MaterialIcons } from '@expo/vector-icons';
 import { AntDesign } from '@expo/vector-icons';
+import { connect } from 'react-redux';
 
 function SignUpScreen(props) {
   const [username, setUsername] = useState('');
@@ -44,15 +45,14 @@ function SignUpScreen(props) {
       body: `username=${username}&email=${email}&password=${password}`,
     });
     const body = await data.json();
-    console.log('/////body', body);
+    // console.log('///bodyyy', body);
 
     if (body.result == true) {
-      // props.addToken(body.token);
+      props.addToken(body.token);
       setModalVisible(true);
     } else {
       return;
     }
-    // props.navigation.navigate('Home');
   };
 
   const onPressView = () => {
@@ -69,7 +69,7 @@ function SignUpScreen(props) {
 
   return (
     <View style={styles.container}>
-      <Modal visible={modalVisible} animationType="slide" transparent={true}>
+      <Modal visible={modalVisible} animationType='slide' transparent={true}>
         <TouchableHighlight
           style={styles.modalView}
           underlayColor={'rgba(10, 10, 10, 0.8)'}
@@ -82,17 +82,23 @@ function SignUpScreen(props) {
             }}
           >
             <MaterialIcons
-              name="close"
+              name='close'
               size={27}
               style={{ ...styles.modalToggle, ...styles.modalClose }}
               color={'#fff'}
               onPress={() => onPressClose()}
             />
             <View style={styles.modalContent}>
-              <Image style={styles.modalImage} source={modalImage} />
-              <Text style={styles.modalText}>Congratulations! 👏 🎉</Text>
+              <Image
+                style={styles.modalImage}
+                source={require('../assets/congrats.png')}
+              />
+              <Text style={styles.modalTextTitle}>Congratulations!</Text>
               <Text style={styles.modalText}>
-                Your account has been created. Use your credentials to Login.
+                Your account has been created.
+              </Text>
+              <Text style={styles.modalText}>
+                Use your credentials to Login.
               </Text>
             </View>
           </View>
@@ -101,29 +107,34 @@ function SignUpScreen(props) {
       <Input
         containerStyle={{ marginBottom: 15, width: '70%' }}
         inputStyle={{ marginLeft: 10, color: 'white' }}
-        placeholder="username"
+        placeholder='username'
+        autoCapitalize={false}
+        autoCorrect={false}
         // errorStyle={{ color: "red" }}
         // errorMessage="Enter a valid email"
-        leftIcon={<Icon name="user" size={24} color="#ffffff" />}
+        leftIcon={<Icon name='user' size={24} color='#ffffff' />}
         onChangeText={(evt) => onSetUsername(evt)}
       />
       <Input
         containerStyle={{ marginBottom: 15, width: '70%' }}
         inputStyle={{ marginLeft: 10, color: 'white' }}
-        placeholder="email@adress.com"
+        placeholder='email@adress.com'
+        autoCapitalize='none'
+        autoCorrect={false}
         // errorStyle={{ color: "red" }}
         // errorMessage="Enter a valid email"
-        leftIcon={<Icon name="envelope" size={21} color="#ffffff" />}
+        leftIcon={<Icon name='envelope' size={21} color='#ffffff' />}
         onChangeText={(evt) => onSetEmail(evt)}
       />
       <Input
         containerStyle={{ width: '70%' }}
         inputStyle={{ marginLeft: 10, color: 'white' }}
-        placeholder="password"
+        placeholder='password'
+        autoCorrect={false}
         secureTextEntry={true}
         // errorStyle={{ color: "red" }}
         // errorMessage="Password must be at least 6 characters"
-        leftIcon={<Icon name="lock" size={27} color="#ffffff" />}
+        leftIcon={<Icon name='lock' size={27} color='#ffffff' />}
         onChangeText={(evt) => onSetPassword(evt)}
       />
       <Button
@@ -136,8 +147,8 @@ function SignUpScreen(props) {
           backgroundColor: 'rgba(78, 116, 255, 1)',
           borderRadius: 3,
         }}
-        title="Sign Up           "
-        type="solid"
+        title='Sign Up           '
+        type='solid'
         onPress={() => onPressSignUp()}
       />
     </View>
@@ -186,14 +197,34 @@ const styles = StyleSheet.create({
     borderColor: 'white',
     borderRadius: 20,
     backgroundColor: 'white',
+    padding: 5,
   },
   modalImage: {
     flex: 1,
-    width: 360,
+    width: '100%',
+    margin: 20,
+    alignSelf: 'center',
+  },
+  modalTextTitle: {
     textAlign: 'center',
-    borderColor: 'white',
-    borderRadius: 15,
+    fontWeight: '500',
+    marginBottom: 6,
+    fontSize: 20,
+  },
+  modalText: {
+    textAlign: 'center',
+    fontWeight: '400',
+    marginBottom: 5,
+    fontSize: 18,
   },
 });
 
-export default SignUpScreen;
+function mapDispatchToProps(dispatch) {
+  return {
+    addToken: function (token) {
+      dispatch({ type: 'addToken', token: token });
+    },
+  };
+}
+
+export default connect(null, mapDispatchToProps)(SignUpScreen);

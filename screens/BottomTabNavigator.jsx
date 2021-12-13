@@ -1,5 +1,6 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
 import { FontAwesome5 } from '@expo/vector-icons';
 import CashBackScreen from './CashBackScreen';
 import HomeScreen from './HomeScreen';
@@ -7,9 +8,8 @@ import ContactScreen from './ContactScreen';
 import LoginScreen from './LoginScreen';
 import ChatScreen from './ChatScreen';
 import SignUpScreen from './SignUpScreen';
-import { createStackNavigator } from '@react-navigation/stack';
-import { Button } from 'react-native-elements';
 import ProfileScreen from './ProfileScreen';
+import ParametersScreen from './ParametersScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -70,8 +70,6 @@ function StackChat() {
         component={ContactScreen}
       />
       <Stack.Screen
-        name="Chat"
-        component={ChatScreen}
         options={({ route }) => {
           console.log('route', route);
           return {
@@ -87,6 +85,8 @@ function StackChat() {
             headerBackTitleVisible: false,
           };
         }}
+        name="Chat"
+        component={ChatScreen}
       />
     </Stack.Navigator>
   );
@@ -124,7 +124,6 @@ function StackSignUp() {
         name="Sign Up"
         component={SignUpScreen}
       />
-
       <Stack.Screen
         options={{
           headerStyle: {
@@ -139,8 +138,44 @@ function StackSignUp() {
         name="Profile Page"
         component={ProfileScreen}
       />
+      <Stack.Screen
+        options={{
+          headerStyle: {
+            backgroundColor: '#111224',
+          },
+          headerTintColor: '#ffffff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+          headerBackTitleVisible: false,
+        }}
+        name="Parameters  ⚙️"
+        component={ParametersScreen}
+      />
     </Stack.Navigator>
   );
 }
+
+// function StackParameters() {
+//   return (
+//     <Stack.Navigator component={LoginScreen}>
+//       <Stack.Screen
+//         options={{
+//           headerStyle: {
+//             backgroundColor: '#111224',
+//           },
+//           headerTintColor: '#ffffff',
+//           headerTitleStyle: {
+//             fontWeight: 'bold',
+//           },
+//           headerBackTitleVisible: false,
+//           headerLeft: null,
+//         }}
+//         name="Parameters"
+//         component={ParametersScreen}
+//       />
+//     </Stack.Navigator>
+//   );
+// }
 
 export default BottomTabNavigator;

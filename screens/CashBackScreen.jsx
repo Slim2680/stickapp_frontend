@@ -176,9 +176,9 @@ function CashBackScreen(props) {
             borderWidth: 1,
             borderColor: '#fff',
           }}
-          icon={<MaterialIcons name="logout" size={20} color="#ffffff" />}
-          title="Visit                      "
-          type="solid"
+          icon={<MaterialIcons name='logout' size={20} color='#ffffff' />}
+          title='Visit                      '
+          type='solid'
           onPress={() => onPressVisit()}
         />
       );
@@ -191,8 +191,8 @@ function CashBackScreen(props) {
     <View style={styles.container}>
       <Header
         statusBarProps={{ barStyle: 'light-content' }}
-        placement="left"
-        backgroundColor="#111224"
+        placement='left'
+        backgroundColor='#111224'
         leftComponent={{
           text: 'My Cash Back 🤑',
           style: { color: '#ffffff', fontWeight: '600', fontSize: 20 },
@@ -202,13 +202,13 @@ function CashBackScreen(props) {
 
       <View style={styles.infoIcon}>
         <TouchableOpacity onPress={() => onPressInfo()}>
-          <MaterialIcons name="info-outline" size={35} color="white" />
+          <MaterialIcons name='info-outline' size={35} color='white' />
         </TouchableOpacity>
       </View>
 
       <View style={styles.starIcon}>
         <TouchableOpacity onPress={() => onPressStar()}>
-          <AntDesign name={icon} size={80} color="#ffdf00" />
+          <AntDesign name={icon} size={80} color='#ffdf00' />
         </TouchableOpacity>
       </View>
 
@@ -228,7 +228,7 @@ function CashBackScreen(props) {
           marginTop: 18,
         }}
       />
-      <Modal visible={modalVisible} animationType="slide" transparent={true}>
+      <Modal visible={modalVisible} animationType='slide' transparent={true}>
         <TouchableHighlight
           style={styles.modalView}
           underlayColor={'rgba(10, 10, 10, 0.8)'}
@@ -241,7 +241,7 @@ function CashBackScreen(props) {
             }}
           >
             <MaterialIcons
-              name="close"
+              name='close'
               size={27}
               style={{ ...styles.modalToggle, ...styles.modalClose }}
               color={'#fff'}
@@ -260,16 +260,16 @@ function CashBackScreen(props) {
                 marginBottom: 7,
                 marginTop: 20,
               }}
-              icon={<AntDesign name="arrowright" size={20} color="#ffffff" />}
+              icon={<AntDesign name='arrowright' size={20} color='#ffffff' />}
               title={couponCode}
-              type="solid"
+              type='solid'
               onPress={() => onPressCoupon()}
             />
             {renderElement()}
           </View>
         </TouchableHighlight>
       </Modal>
-      <Modal visible={modalInfoVisible} animationType="slide">
+      <Modal visible={modalInfoVisible} animationType='slide'>
         <TouchableHighlight
           style={styles.modalInfoView}
           underlayColor={'rgba(0, 0, 0, 1)'}
@@ -283,7 +283,7 @@ function CashBackScreen(props) {
             }}
           >
             <MaterialIcons
-              name="close"
+              name='close'
               size={24}
               style={{ ...styles.modalInfoToggle, ...styles.modalInfoClose }}
               color={'#fff'}
@@ -331,7 +331,7 @@ function CashBackScreen(props) {
       <ScrollView contentContainerStyle={styles.stickerView}>
         {brands.map((brand, i) => {
           return (
-            <TouchableOpacity key={i} onPress={() => onPressImage(brand)}>
+            <TouchableOpacity key={i} onPress={() => onPressImage(brand, i)}>
               <Image key={i} style={styles.tinyImage} source={brand.image} />
             </TouchableOpacity>
           );
