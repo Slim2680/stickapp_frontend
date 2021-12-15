@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Toast from 'react-native-toast-message';
 import {
 	View,
 	Text,
@@ -18,6 +19,7 @@ function HomeScreen(props) {
 	const [modalImage, setModalImage] = useState('');
 	const [liked, setLiked] = useState(false);
 	const [newCategory, setNewCategory] = useState([]);
+	const [stickerId, setStickerId] = useState('');
 	const [popularCategory, setPopularCategory] = useState([]);
 	const [funnyCategory, setFunnyCategory] = useState([]);
 	const [foodCategory, setFoodCategory] = useState([]);
@@ -27,7 +29,7 @@ function HomeScreen(props) {
 	// console.log('/////modalVisible', modalVisible);
 	// console.log('/////modalImage', modalImage);
 	// console.log('/////liked', liked);
-	// console.log('---state.token', props.token);
+	console.log('///homescreen token = ', props.token);
 
 	const categories = [
 		'food',
@@ -127,6 +129,14 @@ function HomeScreen(props) {
 		loadData();
 	}, []);
 
+	const showToast = () => {
+		Toast.show({
+			type: 'success',
+			text1: 'Sticker added to favorites! 💟',
+			text2: 'You can now find it on the chat page',
+		});
+	};
+
 	let color;
 	let icon;
 	if (liked === true) {
@@ -145,41 +155,11 @@ function HomeScreen(props) {
 		console.log('---press detected #title');
 	};
 
-	const onPressNew = (neww) => {
+	const onPressSticker = (sticker) => {
 		setModalVisible(true);
-		setModalImage(neww.url);
-		console.log(neww);
-		// console.log('neww', neww);
-	};
-
-	const onPressPopular = (popular) => {
-		setModalVisible(true);
-		setModalImage(popular.url);
-	};
-
-	const onPressFunny = (funny) => {
-		setModalVisible(true);
-		setModalImage(funny.url);
-	};
-
-	const onPressFood = (food) => {
-		setModalVisible(true);
-		setModalImage(food.url);
-	};
-
-	const onPressSport = (sport) => {
-		setModalVisible(true);
-		setModalImage(sport.url);
-	};
-
-	const onPressAnimal = (animal) => {
-		setModalVisible(true);
-		setModalImage(animal.url);
-	};
-
-	const onPressLandmark = (landmark) => {
-		setModalVisible(true);
-		setModalImage(landmark.url);
+		setModalImage(sticker.url);
+		setStickerId(sticker._id);
+		console.log('--sticker', sticker);
 	};
 
 	const onPressClose = () => {
@@ -189,23 +169,32 @@ function HomeScreen(props) {
 
 	const onPressFavorite = async () => {
 		console.log('---press detected #favorite');
-		liked === false ? setLiked(true) : setLiked(false);
+		// liked === false ? setLiked(true) : setLiked(false);
+		setLiked(liked === false);
+		showToast();
+		setModalVisible(!modalVisible);
 
-		// if (liked) {
-		// 	const data = await fetch('http://10.3.11.10:3000/add-to-favorite', {
-		// 		method: 'POST',
-		// 		headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-		// 		body: `token=${props.token}&stickerId=${'61b33889db2d16d7537f5814'}`,
-		// 	});
-		// 	const body = await data.json();
-		// } else {
-		// 	const data = await fetch('http://10.3.11.10:3000/delete-from-favorite', {
-		// 		method: 'POST',
-		// 		headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-		// 		body: `token=${props.token}&stickerId=${'61b33889db2d16d7537f5814'}`,
-		// 	});
-		// 	const body = await data.json();
-		// }
+		if (liked) {
+			const data = await fetch(
+				'http://10.3.11.10:3000/users/stickers/add-to-favorite',
+				{
+					method: 'POST',
+					headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+					body: `stickerId=${stickerId}&token=${props.token}'}`,
+				}
+			);
+			const body = await data.json();
+		} else {
+			const data = await fetch(
+				'http://10.3.11.10:3000/users/stickers/delete-from-favorite',
+				{
+					method: 'POST',
+					headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+					body: `stickerId=${stickerId}&token=${props.token}`,
+				}
+			);
+			const body = await data.json();
+		}
 	};
 
 	const onPressCopy = () => {
@@ -266,7 +255,6 @@ function HomeScreen(props) {
 								borderColor: '#fff',
 								marginBottom: 7,
 							}}
-							icon={<MaterialIcons name={icon} size={20} color={color} />}
 							title='   Add to favorite'
 							type='solid'
 							onPress={() => onPressFavorite()}
@@ -334,7 +322,7 @@ function HomeScreen(props) {
 				>
 					{newCategory.map((neww, i) => {
 						return (
-							<TouchableOpacity key={i} onPress={() => onPressNew(neww)}>
+							<TouchableOpacity key={i} onPress={() => onPressSticker(neww)}>
 								<Image style={styles.tinySticker} source={{ uri: neww.url }} />
 							</TouchableOpacity>
 						);
@@ -350,7 +338,7 @@ function HomeScreen(props) {
 				>
 					{popularCategory.map((popular, i) => {
 						return (
-							<TouchableOpacity key={i} onPress={() => onPressPopular(popular)}>
+							<TouchableOpacity key={i} onPress={() => onPressSticker(popular)}>
 								<Image
 									style={styles.tinySticker}
 									source={{ uri: popular.url }}
@@ -369,7 +357,7 @@ function HomeScreen(props) {
 				>
 					{funnyCategory.map((funny, i) => {
 						return (
-							<TouchableOpacity key={i} onPress={() => onPressFunny(funny)}>
+							<TouchableOpacity key={i} onPress={() => onPressSticker(funny)}>
 								<Image style={styles.tinySticker} source={{ uri: funny.url }} />
 							</TouchableOpacity>
 						);
@@ -385,7 +373,7 @@ function HomeScreen(props) {
 				>
 					{foodCategory.map((food, i) => {
 						return (
-							<TouchableOpacity key={i} onPress={() => onPressFood(food)}>
+							<TouchableOpacity key={i} onPress={() => onPressSticker(food)}>
 								<Image style={styles.tinySticker} source={{ uri: food.url }} />
 							</TouchableOpacity>
 						);
@@ -401,7 +389,7 @@ function HomeScreen(props) {
 				>
 					{sportCategory.map((sport, i) => {
 						return (
-							<TouchableOpacity key={i} onPress={() => onPressSport(sport)}>
+							<TouchableOpacity key={i} onPress={() => onPressSticker(sports)}>
 								<Image style={styles.tinySticker} source={{ uri: sport.url }} />
 							</TouchableOpacity>
 						);
@@ -417,7 +405,7 @@ function HomeScreen(props) {
 				>
 					{animalCategory.map((animal, i) => {
 						return (
-							<TouchableOpacity key={i} onPress={() => onPressAnimal(animal)}>
+							<TouchableOpacity key={i} onPress={() => onPressSticker(animal)}>
 								<Image
 									style={styles.tinySticker}
 									source={{ uri: animal.url }}
@@ -438,7 +426,7 @@ function HomeScreen(props) {
 						return (
 							<TouchableOpacity
 								key={i}
-								onPress={() => onPressLandmark(landmark)}
+								onPress={() => onPressSticker(landmark)}
 							>
 								<Image
 									style={styles.tinySticker}
