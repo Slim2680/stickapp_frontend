@@ -48,7 +48,7 @@ function ContactScreen(props) {
 		},
 		{
 			name: 'Christelle',
-			avatar: require('../assets/pp0.png'),
+			avatar: '../assets/pp0.png',
 			conv: 'hey Cricri',
 		},
 		{

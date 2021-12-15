@@ -11,6 +11,7 @@ import { Button } from 'react-native-elements';
 import { GiftedChat, Send, Composer, Actions } from 'react-native-gifted-chat';
 import socketIOClient from 'socket.io-client';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { connect } from 'react-redux';
 
 var socket = socketIOClient('http://10.3.11.7:3000');
 
@@ -20,9 +21,24 @@ function ChatScreen(props) {
 	const [listMessages, setListMessages] = useState([]);
 	const [iconPressed, setIconPressed] = useState(false);
 	const [accessoryHeight, setAccessoryHeight] = useState(0);
+	const [favorites, setFavorites] = useState([]);
 	console.log('////////////SETMESSAGES', messages);
 	console.log('---iconPressed', iconPressed);
 	console.log('---accessoryHeight', accessoryHeight);
+	console.log('/////favorites', favorites);
+	console.log('///chatscreen token = ', props.token);
+
+	useEffect(() => {
+		async function loadData() {
+			const data = await fetch(
+				`http://10.3.11.10:3000/users/stickers/show-favorites?token=${props.token}`
+			);
+			const body = await data.json();
+			console.log('---body', body);
+			setFavorites(body.stickers);
+		}
+		loadData();
+	}, []);
 
 	useEffect(() => {
 		socket.on('sendMessageToAll', (newMessageData) => {
@@ -85,30 +101,23 @@ function ChatScreen(props) {
 					showsHorizontalScrollIndicator={false}
 					contentContainerStyle={styles.accessory}
 				>
-					<TouchableOpacity
-						onPress={() => onPressSticker(require('../assets/funny3.jpg'))}
-					>
-						<Image
-							style={styles.stickers}
-							source={require('../assets/funny3.jpg')}
-						></Image>
-					</TouchableOpacity>
-					<Image
-						style={styles.stickers}
-						source={require('../assets/funny3.jpg')}
-					></Image>
-					<Image
-						style={styles.stickers}
-						source={require('../assets/funny3.jpg')}
-					></Image>
-					<Image
-						style={styles.stickers}
-						source={require('../assets/funny3.jpg')}
-					></Image>
-					<Image
-						style={styles.stickers}
-						source={require('../assets/funny3.jpg')}
-					></Image>
+					{favorites.map((favorite, i) => {
+						console.log(
+							'🛑/🛑/🛑/🛑/🛑/🛑/🛑/🛑/🛑/🛑/🛑/favorite.url',
+							favorite.url
+						);
+						return (
+							<TouchableOpacity
+								key={i}
+								onPress={() => onPressSticker(require('../assets/funny3.jpg'))}
+							>
+								<Image
+									style={styles.stickers}
+									source={{ uri: favorite.url }}
+								></Image>
+							</TouchableOpacity>
+						);
+					})}
 					{/* <Button title='test2'></Button> */}
 				</ScrollView>
 			);
@@ -126,7 +135,6 @@ function ChatScreen(props) {
 			renderActions={() => renderActions()}
 			renderAccessory={() => renderAccessoryBar()}
 			accessoryStyle={{ height: accessoryHeight }}
-			alwaysShowSend
 			bottomOffset={135}
 			placeholder='Send a message ...'
 			user={{
@@ -161,4 +169,8 @@ const styles = StyleSheet.create({
 	},
 });
 
-export default ChatScreen;
+function mapStateToProps(state) {
+	return { token: state.token };
+}
+
+export default connect(mapStateToProps, null)(ChatScreen);
