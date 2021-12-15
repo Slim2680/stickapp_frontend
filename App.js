@@ -1,7 +1,8 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import SplashScreen from './screens/SplashScreen';
+ 
+import OnboardingScreen from './screens/OnboardingScreen';
 import BottomTabNavigator from './screens/BottomTabNavigator';
 const Stack = createStackNavigator();
 import Toast, { BaseToast } from 'react-native-toast-message';
@@ -10,6 +11,7 @@ import token from './reducers/token';
 import { Provider } from 'react-redux';
 import { createStore, combineReducers } from 'redux';
 const store = createStore(combineReducers({ token }));
+
 
 function App() {
 	const toastConfig = {
@@ -41,7 +43,7 @@ function App() {
 		<Provider store={store}>
 			<NavigationContainer>
 				<Stack.Navigator screenOptions={{ headerShown: false }}>
-					<Stack.Screen name='SplashScreen' component={SplashScreen} />
+					<Stack.Screen name='SplashScreen' component={OnboardingScreen} />
 					<Stack.Screen
 						name='BottomTabNavigator'
 						component={BottomTabNavigator}
