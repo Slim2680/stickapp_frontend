@@ -9,7 +9,7 @@ import {
 	Modal,
 	TouchableOpacity,
 } from 'react-native';
-import { Header, Button } from 'react-native-elements';
+import { Header, Button, Badge } from 'react-native-elements';
 import { MaterialIcons } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 
@@ -453,12 +453,14 @@ function HomeScreen(props) {
 	);
 }
 
+
+
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		backgroundColor: '#111224',
 	},
-	submit: {
+	 submit: {
 		backgroundColor: '#71678D',
 		borderRadius: 30,
 		borderWidth: 1.5,
