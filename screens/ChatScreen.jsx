@@ -14,7 +14,7 @@ import socketIOClient from 'socket.io-client';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 
-var socket = socketIOClient('http://10.3.11.7:3000');
+var socket = socketIOClient('http://10.3.11.10:3000');
 
 function ChatScreen(props) {
 	const [messages, setMessages] = useState([]);
@@ -46,10 +46,6 @@ function ChatScreen(props) {
 			setListMessages([...listMessages, newMessageData]);
 		});
 	}, [listMessages]);
-
-	onPressToast = () => {
-		props.navigation.navigate('BottomTabNavigator', { screen: '  ' });
-	};
 
 	const showToast = () => {
 		Toast.show({
