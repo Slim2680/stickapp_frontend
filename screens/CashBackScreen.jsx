@@ -110,6 +110,14 @@ function CashBackScreen(props) {
 		loadData();
 	}, []);
 
+	const showToast = () => {
+		Toast.show({
+			type: 'success',
+			text1: `You've used 1000pts from your balance!`,
+			text2: ' ',
+		});
+	};
+
 	let couponCode;
 	if (couponPressed === true) {
 		couponCode = '   STICKAPP2K21';
@@ -118,11 +126,19 @@ function CashBackScreen(props) {
 	}
 
 	let icon;
-	if (starPressed === true) {
+	if (props.count > 0) {
 		icon = 'star';
 	} else {
 		icon = 'staro';
 	}
+
+	// const showToast = () => {
+	// 	Toast.show({
+	// 		type: 'success',
+	// 		text1: `You used 1000pts from your balance! `,
+	// 		text2: '',
+	// 	});
+	// };
 
 	const onPressImage = (coupon) => {
 		console.log('couponI', coupon.Image);
@@ -155,6 +171,9 @@ function CashBackScreen(props) {
 		console.log('---press detected #coupon');
 		setCouponPressed(true);
 		setVisitPressed(true);
+		props.removePoints();
+		showToast();
+		setModalVisible(false);
 	};
 
 	const onPressVisit = () => {
@@ -263,12 +282,6 @@ function CashBackScreen(props) {
 				</TouchableOpacity>
 			</View>
 
-			<View style={styles.infoIcon}>
-				<TouchableOpacity onPress={() => onPressInfo()}>
-					<MaterialIcons name='info-outline' size={35} color='white' />
-				</TouchableOpacity>
-			</View>
-
 			<View style={styles.starIcon}>
 				<TouchableOpacity onPress={() => onPressStar()}>
 					<AntDesign name={icon} size={80} color='#ffdf00' />
@@ -276,7 +289,7 @@ function CashBackScreen(props) {
 			</View>
 
 			<View>
-				<Text style={styles.textPoint}>You've collected 0pts!</Text>
+				<Text style={styles.textPoint}>You've collected {props.count}pts!</Text>
 			</View>
 
 			<View>
