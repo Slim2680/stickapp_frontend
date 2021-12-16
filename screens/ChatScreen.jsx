@@ -7,6 +7,7 @@ import {
 	ScrollView,
 	TouchableOpacity,
 } from 'react-native';
+import Toast from 'react-native-toast-message';
 import { Button } from 'react-native-elements';
 import { GiftedChat, Send, Composer, Actions } from 'react-native-gifted-chat';
 import socketIOClient from 'socket.io-client';
@@ -22,11 +23,11 @@ function ChatScreen(props) {
 	const [iconPressed, setIconPressed] = useState(false);
 	const [accessoryHeight, setAccessoryHeight] = useState(0);
 	const [favorites, setFavorites] = useState([]);
-	console.log('////////////SETMESSAGES', messages);
-	console.log('---iconPressed', iconPressed);
-	console.log('---accessoryHeight', accessoryHeight);
-	console.log('/////favorites', favorites);
-	console.log('///chatscreen token = ', props.token);
+	// console.log('////////////SETMESSAGES', messages);
+	// console.log('---iconPressed', iconPressed);
+	// console.log('---accessoryHeight', accessoryHeight);
+	// console.log('/////favorites', favorites);
+	// console.log('///chatscreen token = ', props.token);
 
 	useEffect(() => {
 		async function loadData() {
@@ -34,7 +35,7 @@ function ChatScreen(props) {
 				`http://10.3.11.10:3000/users/stickers/show-favorites?token=${props.token}`
 			);
 			const body = await data.json();
-			console.log('---body', body);
+			// console.log('---body', body);
 			setFavorites(body.stickers);
 		}
 		loadData();
@@ -46,8 +47,20 @@ function ChatScreen(props) {
 		});
 	}, [listMessages]);
 
+	onPressToast = () => {
+		props.navigation.navigate('BottomTabNavigator', { screen: '  ' });
+	};
+
+	const showToast = () => {
+		Toast.show({
+			type: 'success',
+			text1: `You've just earned 1000pts! `,
+			text2: 'Go to your cashback to reedem a coupon',
+		});
+	};
+
 	const onPressKeyboard = (text) => {
-		console.log('ONPRESSKEYBOARD', text);
+		// console.log('ONPRESSKEYBOARD', text);
 	};
 
 	const onPressIcon = () => {
@@ -56,27 +69,48 @@ function ChatScreen(props) {
 	};
 
 	const onSend = useCallback((messages = []) => {
-		console.log('MESSAGES', messages[0].text);
+		// console.log('MESSAGES', messages.length);
 		socket.emit('sendMessages', messages[0].text);
-		console.log('---------onSend');
-		setMessages((previousMessages) =>
-			GiftedChat.append(previousMessages, messages)
-		);
+		// console.log('---------onSend');
+		// const filteredMessages = messages.filter((message) => {
+		// 	return !message.image;
+		// });
+		// console.log('filteredMessages', filteredMessages);
+		setMessages((previousMessages) => {
+			// console.log('previousMessages', previousMessages);
+			const giftedMessages = GiftedChat.append(previousMessages, messages);
+			// console.log('giftedMessages', giftedMessages);
+			return giftedMessages;
+		});
 	}, []);
 
 	const onPressSticker = (image) => {
-		console.log('press detected #sticker');
+		// console.log('press detected #sticker');
+		// console.log('image', image);
 		setAccessoryHeight(0);
-		// setMessages([{ image: image }, ...messages]);
-		setMessages((previousMessages) =>
-			GiftedChat.append(previousMessages, [
-				{
-					image:
-						'https://user-images.githubusercontent.com/20162106/35378322-f43394a0-01e4-11e8-84b9-bc41be7bad02.jpg',
+		props.addPoints();
+		showToast();
+		onSend([
+			{
+				image: image.url,
+				createdAt: new Date(),
+				user: {
+					_id: 1,
 				},
-				...messages,
-			])
-		);
+			},
+		]);
+		// setMessages([{ image: image }, ...messages]);
+		// setMessages((previousMessages) =>
+		// 	GiftedChat.append(previousMessages, [
+		// 		{
+		// 			image: image.url,
+		// 			createdAt: new Date(),
+		// 			user: {
+		// 				_id: 1,
+		// 			},
+		// 		},
+		// 	])
+		// );
 	};
 
 	const renderActions = () => {
@@ -102,14 +136,14 @@ function ChatScreen(props) {
 					contentContainerStyle={styles.accessory}
 				>
 					{favorites.map((favorite, i) => {
-						console.log(
-							'🛑/🛑/🛑/🛑/🛑/🛑/🛑/🛑/🛑/🛑/🛑/favorite.url',
-							favorite.url
-						);
+						// console.log(
+						// 	'🛑/🛑/🛑/🛑/🛑/🛑/🛑/🛑/🛑/🛑/🛑/favorite.url',
+						// 	favorite.url
+						// );
 						return (
 							<TouchableOpacity
 								key={i}
-								onPress={() => onPressSticker(require('../assets/funny3.jpg'))}
+								onPress={() => onPressSticker(favorite)}
 							>
 								<Image
 									style={styles.stickers}
@@ -173,4 +207,12 @@ function mapStateToProps(state) {
 	return { token: state.token };
 }
 
-export default connect(mapStateToProps, null)(ChatScreen);
+function mapDispatchToProps(dispatch) {
+	return {
+		addPoints: function () {
+			dispatch({ type: 'addPoints' });
+		},
+	};
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ChatScreen);
