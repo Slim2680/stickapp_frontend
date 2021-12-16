@@ -22,6 +22,7 @@ function CashBackScreen(props) {
   const [visitPressed, setVisitPressed] = useState(false);
   const [starPressed, setStarPressed] = useState(false);
   const [messageVisible, setMessageVisible] = useState(false);
+  const [modalClose, setmodalClose] = useState(true);
   // console.log('/////modalVisible', modalVisible);
   // console.log('/////modalImage', modalImage);
   // console.log('/////visitPressed', visitPressed);
@@ -178,6 +179,11 @@ function CashBackScreen(props) {
     starPressed === false ? setStarPressed(true) : setStarPressed(false);
   };
 
+  const onPressBlockClose = () => {
+    console.log("---press detected #infoclose");
+    setmodalClose(!modalClose);
+  };
+
   const renderElement = () => {
     if (visitPressed === true) {
       return (
@@ -217,14 +223,34 @@ function CashBackScreen(props) {
         rightComponent={{ icon: "search", color: "#fff" }}
       />
 
-      <Modal visible={true} animationType="slide" transparent={true}>
+      <Modal visible={modalClose} animationType="slide" transparent={true}>
         {/* <View style={styles.centeredView} /> */}
         <View style={styles.modalBlock}>
+          <MaterialIcons
+            name="close"
+            size={20}
+            style={{ ...styles.modalPass, ...styles.modalBlockClose }}
+            color={"#fff"}
+            onPress={() => onPressBlockClose()}
+          />
           <View style={styles.modalBlockView}>
-            <Text style={styles.modalText}>
-              Create your account to use Stickers and get your own points for
-              the access at this page
+            <View style={styles.firstModalBlock}>
+              <Text style={styles.modalTextBlock}>NOT CONNECTED 😔</Text>
+            </View>
+            <Text style={styles.modalInfoBlock}>
+              Create an account to benefit from the Cashback program!
             </Text>
+            <View style={styles.clickOnProfile}>
+              <Text style={styles.modalInfoBlock}>
+                Click on the Profile icon to start
+              </Text>
+              <MaterialIcons name="check-box" size={24} color="white" />
+              <View>
+                <Text style={styles.dontShowMessage}>
+                  Don't show this message again.
+                </Text>
+              </View>
+            </View>
           </View>
         </View>
       </Modal>
@@ -313,7 +339,7 @@ function CashBackScreen(props) {
           >
             <MaterialIcons
               name="close"
-              size={24}
+              size={25}
               style={{ ...styles.modalInfoToggle, ...styles.modalInfoClose }}
               color={"#fff"}
               onPress={() => onPressInfoClose()}
@@ -379,6 +405,43 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#111224",
   },
+  dontShowMessage: {
+    marginTop: -28,
+    fontSize: 13,
+    color: "white",
+    marginLeft: 35,
+  },
+  clickOnProfile: {
+    // marginTop: 20,
+    fontSize: 18,
+  },
+  firstModalBlock: {
+    marginBottom: 20,
+  },
+  modalInfoBlock: {
+    color: "white",
+    fontSize: 18,
+    textAlign: "center",
+    backgroundColor: "#111224",
+    marginBottom: 40,
+  },
+  modalTextBlock: {
+    color: "white",
+    fontSize: 20,
+    textAlign: "center",
+    backgroundColor: "#111224",
+    // marginBottom: ,
+  },
+  modalBlockClose: {
+    marginBottom: 10,
+  },
+  modalPass: {
+    marginLeft: 275,
+    borderWidth: 2.5,
+    borderColor: "#fff",
+    borderRadius: 15,
+    alignSelf: "center",
+  },
   modalBlock: {
     flex: 1,
     justifyContent: "center",
@@ -386,19 +449,13 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(10, 10, 10, .3)",
   },
   modalBlockView: {
-    backgroundColor: "rgba(10, 10, 10, 1)",
+    backgroundColor: "#111224",
     borderRadius: 20,
-    padding: 100,
+    padding: 70,
     alignItems: "center",
     justifyContent: "center",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
+    borderColor: "white",
+    borderWidth: 4,
   },
   centeredView: {
     flex: 1,
