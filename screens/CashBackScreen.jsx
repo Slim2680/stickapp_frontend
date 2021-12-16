@@ -261,6 +261,12 @@ function CashBackScreen(props) {
         </TouchableOpacity>
       </View>
 
+      <View style={styles.infoIcon}>
+        <TouchableOpacity onPress={() => onPressInfo()}>
+          <MaterialIcons name="info-outline" size={35} color="white" />
+        </TouchableOpacity>
+      </View>
+
       <View style={styles.starIcon}>
         <TouchableOpacity onPress={() => onPressStar()}>
           <AntDesign name={icon} size={80} color="#ffdf00" />
