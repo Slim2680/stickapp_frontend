@@ -100,7 +100,7 @@ function CashBackScreen(props) {
 
   useEffect(() => {
     async function loadData() {
-      const rawCoupons = await fetch("http://10.3.11.8:3000/cashback");
+      const rawCoupons = await fetch("http://10.3.11.7:3000/cashback");
       const responseCoupons = await rawCoupons.json();
       //   console.log("responseCoupons", responseCoupons);
       setCoupons(responseCoupons.data);

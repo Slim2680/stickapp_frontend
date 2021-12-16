@@ -32,7 +32,7 @@ function ChatScreen(props) {
 	useEffect(() => {
 		async function loadData() {
 			const data = await fetch(
-				`http://10.3.11.10:3000/users/stickers/show-favorites?token=${props.token}`
+				`http://10.3.11.7:3000/users/stickers/show-favorites?token=${props.token}`
 			);
 			const body = await data.json();
 			// console.log('---body', body);

@@ -15,7 +15,7 @@ const OnboardingScreen = ({navigation}) => {
         pages={[
             {
                 backgroundColor: '#97A1FF',
-                image: <Image source={require('../assets/logo-2.png')} />,
+                image: <Image source={require('../assets/stickapp_logo3.png')} />,
         
                 },
 
