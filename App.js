@@ -7,9 +7,10 @@ const Stack = createStackNavigator();
 import Toast, { BaseToast } from 'react-native-toast-message';
 
 import token from './reducers/token';
+import count from './reducers/count';
 import { Provider } from 'react-redux';
 import { createStore, combineReducers } from 'redux';
-const store = createStore(combineReducers({ token }));
+const store = createStore(combineReducers({ token, count }));
 
 function App() {
 	const toastConfig = {
