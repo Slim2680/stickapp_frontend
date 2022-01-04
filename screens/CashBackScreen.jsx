@@ -100,7 +100,7 @@ function CashBackScreen(props) {
 
   useEffect(() => {
     async function loadData() {
-      const rawCoupons = await fetch("http://10.3.11.7:3000/cashback");
+      const rawCoupons = await fetch("https://stickapp-project.herokuapp.com/cashback");
       const responseCoupons = await rawCoupons.json();
       //   console.log("responseCoupons", responseCoupons);
       setCoupons(responseCoupons.data);
@@ -278,7 +278,7 @@ function CashBackScreen(props) {
       </View>
 
       <View>
-        <Text style={styles.text}>Start using Stickers to earn points!</Text>
+        <Text style={styles.text}>Start using Stickers in your chats to earn points!</Text>
       </View>
 
       <View

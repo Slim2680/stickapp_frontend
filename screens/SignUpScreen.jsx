@@ -39,7 +39,7 @@ function SignUpScreen(props) {
 
 	const onPressSignUp = async () => {
 		console.log('click detecte #signup');
-		const data = await fetch('http://10.3.11.10:3000/sign-up', {
+		const data = await fetch('https://stickapp-project.herokuapp.com/sign-up', {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 			body: `username=${username}&email=${email}&password=${password}`,

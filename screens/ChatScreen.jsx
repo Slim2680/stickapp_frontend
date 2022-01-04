@@ -14,7 +14,7 @@ import socketIOClient from 'socket.io-client';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 
-var socket = socketIOClient('http://10.3.11.7:3000');
+var socket = socketIOClient('https://stickapp-project.herokuapp.com');
 
 function ChatScreen(props) {
 	const [messages, setMessages] = useState([]);
@@ -32,7 +32,7 @@ function ChatScreen(props) {
 	useEffect(() => {
 		async function loadData() {
 			const data = await fetch(
-				`http://10.3.11.7:3000/users/stickers/show-favorites?token=${props.token}`
+				`https://stickapp-project.herokuapp.com/users/stickers/show-favorites?token=${props.token}`
 			);
 			const body = await data.json();
 			// console.log('---body', body);

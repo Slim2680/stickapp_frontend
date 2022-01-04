@@ -35,7 +35,7 @@ function LoginScreen(props) {
 		console.log('click detecte #login');
 		setErrEmailLogin('');
 		setErrPasswordLogin('');
-		const data = await fetch('http://10.3.11.10:3000/log-in', {
+		const data = await fetch('https://stickapp-project.herokuapp.com/log-in', {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 			body: `email=${email}&password=${password}`,
@@ -118,7 +118,7 @@ function LoginScreen(props) {
 					backgroundColor: 'rgba(78, 116, 255, 1)',
 					borderRadius: 3,
 				}}
-				icon={<Icon name='arrow-right' size={20} color='#ffffff' />}
+				
 				title='Sign Up           '
 				type='solid'
 				onPress={() => onPressSignUp()}

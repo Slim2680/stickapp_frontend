@@ -22,14 +22,14 @@ const OnboardingScreen = ({navigation}) => {
             {
             backgroundColor: '#fff',
             image: <Image source={require('../assets/undraw_Social_networking_re_i1ex.png')} />,
-            title: 'Use stickers in your messages... ',
+            title: 'Use stickers in your chats... ',
             subtitle: '',
             },
 
             {
                 backgroundColor: '#fff',
                 image: <Image source={require('../assets/undraw_Savings_re_eq4w.png')} />,
-                title: 'Collect points for using them...',
+                title: 'Collect points ...',
                 
             },
 
@@ -50,7 +50,7 @@ const OnboardingScreen = ({navigation}) => {
             {
                 backgroundColor: '#fff',
                 image: <Image source={require('../assets/undraw_Winners_re_wr1l.png')} />,
-                title: 'You text, you collect, you shop!!!',
+                title: 'You text...You collect...You shop!',
                 
             },  
   ]}

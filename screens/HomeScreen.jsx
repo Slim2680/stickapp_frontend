@@ -62,7 +62,7 @@ function HomeScreen(props) {
 
 	useEffect(() => {
 		async function loadData() {
-			const rawNew = await fetch('http://10.3.11.7:3000/categories/new');
+			const rawNew = await fetch('https://stickapp-project.herokuapp.com/categories/new');
 			const responseNew = await rawNew.json();
 			setNewCategory(responseNew.data);
 		}
@@ -72,7 +72,7 @@ function HomeScreen(props) {
 	useEffect(() => {
 		async function loadData() {
 			const rawPopular = await fetch(
-				'http://10.3.11.7:3000/categories/popular'
+				'https://stickapp-project.herokuapp.com/categories/popular'
 			);
 			const responsePopular = await rawPopular.json();
 			setPopularCategory(responsePopular.data);
@@ -82,7 +82,7 @@ function HomeScreen(props) {
 
 	useEffect(() => {
 		async function loadData() {
-			const rawFunny = await fetch('http://10.3.11.7:3000/categories/funny');
+			const rawFunny = await fetch('https://stickapp-project.herokuapp.com/categories/funny');
 			const responseFunny = await rawFunny.json();
 			setFunnyCategory(responseFunny.data);
 		}
@@ -91,7 +91,7 @@ function HomeScreen(props) {
 
 	useEffect(() => {
 		async function loadData() {
-			const rawFood = await fetch('http://10.3.11.7:3000/categories/food');
+			const rawFood = await fetch('https://stickapp-project.herokuapp.com/categories/food');
 			const responseFood = await rawFood.json();
 			setFoodCategory(responseFood.data);
 		}
@@ -100,7 +100,7 @@ function HomeScreen(props) {
 
 	useEffect(() => {
 		async function loadData() {
-			const rawSport = await fetch('http://10.3.11.7:3000/categories/sports');
+			const rawSport = await fetch('https://stickapp-project.herokuapp.com/categories/sports');
 			const responseSport = await rawSport.json();
 			setSportCategory(responseSport.data);
 		}
@@ -110,7 +110,7 @@ function HomeScreen(props) {
 	useEffect(() => {
 		async function loadData() {
 			const rawAnimal = await fetch(
-				'http://10.3.11.7:3000/categories/animals'
+				'https://stickapp-project.herokuapp.com:3000/categories/animals'
 			);
 			const responseAnimal = await rawAnimal.json();
 			setAnimalCategory(responseAnimal.data);
@@ -121,7 +121,7 @@ function HomeScreen(props) {
 	useEffect(() => {
 		async function loadData() {
 			const rawLandmark = await fetch(
-				'http://10.3.11.7:3000/categories/landmark'
+				'https://stickapp-project.herokuapp.com/categories/landmark'
 			);
 			const responseLandmark = await rawLandmark.json();
 			setLandmarkCategory(responseLandmark.data);
@@ -176,7 +176,7 @@ function HomeScreen(props) {
 
 		if (liked) {
 			const data = await fetch(
-				'http://10.3.11.7:3000/users/stickers/add-to-favorite',
+				'https://stickapp-project.herokuapp.com/users/stickers/add-to-favorite',
 				{
 					method: 'POST',
 					headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -186,7 +186,7 @@ function HomeScreen(props) {
 			const body = await data.json();
 		} else {
 			const data = await fetch(
-				'http://10.3.11.7:3000/users/stickers/delete-from-favorite',
+				'https://stickapp-project.herokuapp.com/users/stickers/delete-from-favorite',
 				{
 					method: 'POST',
 					headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -217,7 +217,7 @@ function HomeScreen(props) {
 				placement='left'
 				backgroundColor='#111224'
 				leftComponent={{
-					text: 'Welcome to.. StickApp! 🦄',
+					text: 'StickApp 🦄',
 					style: {
 						color: '#ffffff',
 						fontWeight: '600',
