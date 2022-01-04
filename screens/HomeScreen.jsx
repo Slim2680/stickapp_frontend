@@ -62,7 +62,11 @@ function HomeScreen(props) {
 
 	useEffect(() => {
 		async function loadData() {
+<<<<<<< HEAD
 			const rawNew = await fetch('https://stickapp-project.herokuapp.com/categories/new');
+=======
+			const rawNew = await fetch('http://10.3.11.10:3000/categories/new');
+>>>>>>> 631899d606e682155595b3ad48331592273e490b
 			const responseNew = await rawNew.json();
 			setNewCategory(responseNew.data);
 		}
@@ -72,7 +76,11 @@ function HomeScreen(props) {
 	useEffect(() => {
 		async function loadData() {
 			const rawPopular = await fetch(
+<<<<<<< HEAD
 				'https://stickapp-project.herokuapp.com/categories/popular'
+=======
+				'http://10.3.11.10:3000/categories/popular'
+>>>>>>> 631899d606e682155595b3ad48331592273e490b
 			);
 			const responsePopular = await rawPopular.json();
 			setPopularCategory(responsePopular.data);
@@ -82,7 +90,11 @@ function HomeScreen(props) {
 
 	useEffect(() => {
 		async function loadData() {
+<<<<<<< HEAD
 			const rawFunny = await fetch('https://stickapp-project.herokuapp.com/categories/funny');
+=======
+			const rawFunny = await fetch('http://10.3.11.10:3000/categories/funny');
+>>>>>>> 631899d606e682155595b3ad48331592273e490b
 			const responseFunny = await rawFunny.json();
 			setFunnyCategory(responseFunny.data);
 		}
@@ -91,7 +103,11 @@ function HomeScreen(props) {
 
 	useEffect(() => {
 		async function loadData() {
+<<<<<<< HEAD
 			const rawFood = await fetch('https://stickapp-project.herokuapp.com/categories/food');
+=======
+			const rawFood = await fetch('http://10.3.11.10:3000/categories/food');
+>>>>>>> 631899d606e682155595b3ad48331592273e490b
 			const responseFood = await rawFood.json();
 			setFoodCategory(responseFood.data);
 		}
@@ -100,7 +116,11 @@ function HomeScreen(props) {
 
 	useEffect(() => {
 		async function loadData() {
+<<<<<<< HEAD
 			const rawSport = await fetch('https://stickapp-project.herokuapp.com/categories/sports');
+=======
+			const rawSport = await fetch('http://10.3.11.10:3000/categories/sports');
+>>>>>>> 631899d606e682155595b3ad48331592273e490b
 			const responseSport = await rawSport.json();
 			setSportCategory(responseSport.data);
 		}
@@ -110,7 +130,11 @@ function HomeScreen(props) {
 	useEffect(() => {
 		async function loadData() {
 			const rawAnimal = await fetch(
+<<<<<<< HEAD
 				'https://stickapp-project.herokuapp.com:3000/categories/animals'
+=======
+				'http://10.3.11.10:3000/categories/animals'
+>>>>>>> 631899d606e682155595b3ad48331592273e490b
 			);
 			const responseAnimal = await rawAnimal.json();
 			setAnimalCategory(responseAnimal.data);
@@ -121,7 +145,11 @@ function HomeScreen(props) {
 	useEffect(() => {
 		async function loadData() {
 			const rawLandmark = await fetch(
+<<<<<<< HEAD
 				'https://stickapp-project.herokuapp.com/categories/landmark'
+=======
+				'http://10.3.11.10:3000/categories/landmark'
+>>>>>>> 631899d606e682155595b3ad48331592273e490b
 			);
 			const responseLandmark = await rawLandmark.json();
 			setLandmarkCategory(responseLandmark.data);
@@ -176,7 +204,11 @@ function HomeScreen(props) {
 
 		if (liked) {
 			const data = await fetch(
+<<<<<<< HEAD
 				'https://stickapp-project.herokuapp.com/users/stickers/add-to-favorite',
+=======
+				'http://10.3.11.10:3000/users/stickers/add-to-favorite',
+>>>>>>> 631899d606e682155595b3ad48331592273e490b
 				{
 					method: 'POST',
 					headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -186,7 +218,11 @@ function HomeScreen(props) {
 			const body = await data.json();
 		} else {
 			const data = await fetch(
+<<<<<<< HEAD
 				'https://stickapp-project.herokuapp.com/users/stickers/delete-from-favorite',
+=======
+				'http://10.3.11.10:3000/users/stickers/delete-from-favorite',
+>>>>>>> 631899d606e682155595b3ad48331592273e490b
 				{
 					method: 'POST',
 					headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -441,14 +477,12 @@ function HomeScreen(props) {
 	);
 }
 
-
-
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		backgroundColor: '#111224',
 	},
-	 submit: {
+	submit: {
 		backgroundColor: '#71678D',
 		borderRadius: 30,
 		borderWidth: 1.5,

@@ -14,7 +14,11 @@ import socketIOClient from 'socket.io-client';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 
+<<<<<<< HEAD
 var socket = socketIOClient('https://stickapp-project.herokuapp.com');
+=======
+var socket = socketIOClient('http://10.3.11.10:3000');
+>>>>>>> 631899d606e682155595b3ad48331592273e490b
 
 function ChatScreen(props) {
 	const [messages, setMessages] = useState([]);
@@ -32,7 +36,11 @@ function ChatScreen(props) {
 	useEffect(() => {
 		async function loadData() {
 			const data = await fetch(
+<<<<<<< HEAD
 				`https://stickapp-project.herokuapp.com/users/stickers/show-favorites?token=${props.token}`
+=======
+				`http://10.3.11.10:3000/users/stickers/show-favorites?token=${props.token}`
+>>>>>>> 631899d606e682155595b3ad48331592273e490b
 			);
 			const body = await data.json();
 			// console.log('---body', body);
@@ -46,10 +54,6 @@ function ChatScreen(props) {
 			setListMessages([...listMessages, newMessageData]);
 		});
 	}, [listMessages]);
-
-	onPressToast = () => {
-		props.navigation.navigate('BottomTabNavigator', { screen: '  ' });
-	};
 
 	const showToast = () => {
 		Toast.show({
